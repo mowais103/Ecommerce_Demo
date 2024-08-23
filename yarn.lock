@@ -2775,6 +2775,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/underscore@npm:^1.11.15":
+  version: 1.11.15
+  resolution: "@types/underscore@npm:1.11.15"
+  checksum: 25fdf6da96e0d11ca39a4740aab6fa3bd717e57301be4cb9e7893dc0ad6ce330992d0c8e0b02cac5c5ea86df6f8949c5a8f1fb95f3666b85418d399d3b1112e9
+  languageName: node
+  linkType: hard
+
 "@types/yargs-parser@npm:*":
   version: 21.0.3
   resolution: "@types/yargs-parser@npm:21.0.3"
@@ -3003,6 +3010,7 @@ __metadata:
     "@react-navigation/native-stack": ^6.11.0
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
+    "@types/underscore": ^1.11.15
     babel-jest: ^29.6.3
     eslint: ^8.19.0
     jest: ^29.6.3
@@ -3013,6 +3021,7 @@ __metadata:
     react-native-screens: ^3.34.0
     react-test-renderer: 18.3.1
     typescript: 5.0.4
+    underscore: ^1.13.7
   languageName: unknown
   linkType: soft
 
@@ -9270,6 +9279,13 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
+  languageName: node
+  linkType: hard
+
+"underscore@npm:^1.13.7":
+  version: 1.13.7
+  resolution: "underscore@npm:1.13.7"
+  checksum: 174b011af29e4fbe2c70eb2baa8bfab0d0336cf2f5654f364484967bc6264a86224d0134b9176e4235c8cceae00d11839f0fd4824268de04b11c78aca1241684
   languageName: node
   linkType: hard
 

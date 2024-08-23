@@ -1,4 +1,4 @@
-import {TFontSize} from '../types/common';
+import {TFontSize, TSpacing} from '../types/common';
 
 const Colors = {
   pineGreen: '#294F47',
@@ -16,4 +16,12 @@ const FontSizes: Record<TFontSize, number> = {
   xxl: 32,
 };
 
-export {Colors, FontSizes};
+const STDSpacing: Record<TSpacing, number> = {
+  xs: 5,
+  small: 8,
+  medium: 16,
+  large: 32,
+  xl: 48,
+};
+
+export {Colors, FontSizes, STDSpacing};

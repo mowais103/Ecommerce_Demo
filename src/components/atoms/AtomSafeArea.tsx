@@ -1,11 +1,12 @@
-import React, {useMemo} from 'react';
+import React, {ReactNode, useMemo} from 'react';
 import {View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Colors} from '../../styles/common';
+import {TColor} from '../../types/common';
 
 type AtomSafeAreaProps = {
-  backgroundColor: keyof typeof Colors;
-  children: JSX.Element;
+  backgroundColor: TColor;
+  children: ReactNode;
 };
 
 const AtomSafeArea = ({children, backgroundColor}: AtomSafeAreaProps) => {
