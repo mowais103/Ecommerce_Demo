@@ -1,23 +1,21 @@
 import React, {ReactNode} from 'react';
 import {AtomSafeArea} from './AtomSafeArea';
 import {TColor} from '../../types/common';
-import {AtomView} from './AtomView';
 
 type AtomScreenContainerProps = {
   children?: ReactNode;
   backgroundColor?: TColor;
-  safeArea?: boolean;
+  screenHeader?: boolean;
 };
 
 const AtomScreenContainer = ({
   children,
   backgroundColor,
-  safeArea,
-}: AtomScreenContainerProps) =>
-  safeArea ? (
-    <AtomSafeArea backgroundColor={backgroundColor}>{children}</AtomSafeArea>
-  ) : (
-    <AtomView flex={1}>{children}</AtomView>
-  );
+  screenHeader,
+}: AtomScreenContainerProps) => (
+  <AtomSafeArea backgroundColor={backgroundColor} screenHeader={screenHeader}>
+    {children}
+  </AtomSafeArea>
+);
 
 export {AtomScreenContainer};
