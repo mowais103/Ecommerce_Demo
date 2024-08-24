@@ -1,7 +1,15 @@
 import {Platform, ScrollViewProps} from 'react-native';
-import {TFontSize, TSpacing} from '../types/common';
+import {TFontSize, TIconSize, TSpacing} from '../types/common';
 
 export const IS_IOS = Platform.OS === 'ios';
+
+const DEFAULT_SCROLL_VIEW_PROPS: Pick<
+  ScrollViewProps,
+  'showsVerticalScrollIndicator' | 'showsHorizontalScrollIndicator'
+> = {
+  showsVerticalScrollIndicator: false,
+  showsHorizontalScrollIndicator: false,
+};
 
 const Colors = {
   pineGreen: '#294F47',
@@ -27,12 +35,10 @@ const STDSpacing: Record<TSpacing, number> = {
   xl: 48,
 };
 
-const DEFAULT_SCROLL_VIEW_PROPS: Pick<
-  ScrollViewProps,
-  'showsVerticalScrollIndicator' | 'showsHorizontalScrollIndicator'
-> = {
-  showsVerticalScrollIndicator: false,
-  showsHorizontalScrollIndicator: false,
+const IconSizes: Record<TIconSize, number> = {
+  small: 12,
+  medium: 16,
+  large: 20,
 };
 
-export {Colors, FontSizes, STDSpacing, DEFAULT_SCROLL_VIEW_PROPS};
+export {Colors, FontSizes, STDSpacing, DEFAULT_SCROLL_VIEW_PROPS, IconSizes};
