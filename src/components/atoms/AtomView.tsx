@@ -1,6 +1,8 @@
 import React, {ReactNode} from 'react';
 import {
   GestureResponderEvent,
+  ScrollViewProps,
+  StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
@@ -8,10 +10,27 @@ import {
   ViewStyle,
 } from 'react-native';
 import {TColor, TSpacing} from '../../types/common';
-import {Colors, STDSpacing} from '../../styles/common';
+import {
+  Colors,
+  DEFAULT_SCROLL_VIEW_PROPS,
+  IS_IOS,
+  STDSpacing,
+} from '../../styles/common';
 import {debounce} from 'underscore';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {memo} from 'react';
 
 const DEFAULT_DEBOUNCE_TIME = 100;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+  },
+  contentContainerStyle: {
+    flexGrow: 1,
+  },
+});
 
 type AtomViewProps = ViewProps &
   TouchableOpacityProps & {
@@ -43,92 +62,117 @@ type AtomViewProps = ViewProps &
     pH?: TSpacing;
     pV?: TSpacing;
     debounceTime?: number;
+    scroll?: boolean;
+    scrollViewProps?: ScrollViewProps;
   };
 
-const AtomView = ({
-  children,
-  onPress,
-  borderColor,
-  borderWidth,
-  borderRadius,
-  pL,
-  pB,
-  pAll,
-  pR,
-  pV,
-  pH,
-  pT,
-  backgroundColor,
-  position,
-  top,
-  right,
-  bottom,
-  left,
-  activeOpacity = 0.7,
-  debounceTime = DEFAULT_DEBOUNCE_TIME,
-  style,
-  ...rest
-}: AtomViewProps) => {
-  let viewStyle: ViewStyle = {};
+const AtomView = memo(
+  ({
+    children,
+    onPress,
+    borderColor,
+    borderWidth,
+    borderRadius,
+    pL,
+    pB,
+    pAll,
+    pR,
+    pV,
+    pH,
+    pT,
+    backgroundColor,
+    position,
+    top,
+    right,
+    bottom,
+    left,
+    activeOpacity = 0.7,
+    debounceTime = DEFAULT_DEBOUNCE_TIME,
+    scroll,
+    scrollViewProps,
+    style,
+    ...rest
+  }: AtomViewProps) => {
+    let viewStyle: ViewStyle = {};
 
-  if (pL) {
-    viewStyle = {paddingLeft: STDSpacing[pL]};
-  }
-  if (pR) {
-    viewStyle = {...viewStyle, paddingRight: STDSpacing[pR]};
-  }
-  if (pT) {
-    viewStyle = {...viewStyle, paddingTop: STDSpacing[pT]};
-  }
-  if (pB) {
-    viewStyle = {...viewStyle, paddingBottom: STDSpacing[pB]};
-  }
-  if (pAll) {
-    viewStyle = {...viewStyle, padding: STDSpacing[pAll]};
-  }
-  if (pH) {
-    viewStyle = {...viewStyle, paddingHorizontal: STDSpacing[pH]};
-  }
-  if (pV) {
-    viewStyle = {...viewStyle, paddingVertical: STDSpacing[pV]};
-  }
-  if (backgroundColor) {
-    viewStyle = {...viewStyle, backgroundColor: Colors[backgroundColor]};
-  }
-  if (borderRadius) {
-    viewStyle = {...viewStyle, borderRadius: STDSpacing[borderRadius]};
-  }
+    if (pL) {
+      viewStyle = {paddingLeft: STDSpacing[pL]};
+    }
+    if (pR) {
+      viewStyle = {...viewStyle, paddingRight: STDSpacing[pR]};
+    }
+    if (pT) {
+      viewStyle = {...viewStyle, paddingTop: STDSpacing[pT]};
+    }
+    if (pB) {
+      viewStyle = {...viewStyle, paddingBottom: STDSpacing[pB]};
+    }
+    if (pAll) {
+      viewStyle = {...viewStyle, padding: STDSpacing[pAll]};
+    }
+    if (pH) {
+      viewStyle = {...viewStyle, paddingHorizontal: STDSpacing[pH]};
+    }
+    if (pV) {
+      viewStyle = {...viewStyle, paddingVertical: STDSpacing[pV]};
+    }
+    if (backgroundColor) {
+      viewStyle = {...viewStyle, backgroundColor: Colors[backgroundColor]};
+    }
+    if (borderRadius) {
+      viewStyle = {...viewStyle, borderRadius: STDSpacing[borderRadius]};
+    }
 
-  if (position) {
-    viewStyle = {
-      ...viewStyle,
-      position,
-      right: right,
-      left: left,
-      bottom: bottom,
-      top: top,
-    };
-  }
-  if (borderColor) {
-    viewStyle = {
-      ...viewStyle,
-      borderColor,
-      borderWidth: borderWidth ?? 1,
-    };
-  }
+    if (position) {
+      viewStyle = {
+        ...viewStyle,
+        position,
+        right: right,
+        left: left,
+        bottom: bottom,
+        top: top,
+      };
+    }
+    if (borderColor) {
+      viewStyle = {
+        ...viewStyle,
+        borderColor,
+        borderWidth: borderWidth ?? 1,
+      };
+    }
 
-  const debouncedPress = debounce(
-    (event: GestureResponderEvent) => {
-      onPress ? onPress(event) : () => null;
-    },
-    debounceTime || DEFAULT_DEBOUNCE_TIME, // to satisfy TypeScript
-    true,
-  );
+    const debouncedPress = debounce(
+      (event: GestureResponderEvent) => {
+        onPress ? onPress(event) : () => null;
+      },
+      debounceTime || DEFAULT_DEBOUNCE_TIME, // to satisfy TypeScript
+      true,
+    );
 
-  const handleOnPress = (event: GestureResponderEvent) => debouncedPress(event);
+    const handleOnPress = (event: GestureResponderEvent) =>
+      debouncedPress(event);
 
-  if (onPress) {
-    return (
+    const renderBody = () => (
+      <View style={[style, viewStyle]} {...rest}>
+        {children}
+      </View>
+    );
+
+    if (scroll) {
+      return (
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.contentContainerStyle}
+          {...DEFAULT_SCROLL_VIEW_PROPS}
+          style={[styles.container, scrollViewProps && scrollViewProps.style]}
+          keyboardShouldPersistTaps={'handled'}
+          enableOnAndroid={true}
+          extraHeight={IS_IOS ? 180 : undefined}>
+          {renderBody()}
+        </KeyboardAwareScrollView>
+      );
+    }
+
+    return onPress ? (
       <TouchableOpacity
         style={[style, viewStyle]}
         {...rest}
@@ -136,10 +180,10 @@ const AtomView = ({
         activeOpacity={activeOpacity}>
         {children}
       </TouchableOpacity>
+    ) : (
+      renderBody()
     );
-  }
-
-  return <View>{children}</View>;
-};
+  },
+);
 
 export {AtomView};

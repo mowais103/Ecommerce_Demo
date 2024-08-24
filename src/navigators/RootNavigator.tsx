@@ -16,9 +16,7 @@ const RootNavigator = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{
-          headerTitle: 'SHOP BUDDY',
-        }}
+        options={{headerTitle: 'SHOP BUDDY'}}
       />
     </Stack.Navigator>
   );

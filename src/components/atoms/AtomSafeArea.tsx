@@ -5,7 +5,7 @@ import {Colors} from '../../styles/common';
 import {TColor} from '../../types/common';
 
 type AtomSafeAreaProps = {
-  backgroundColor: TColor;
+  backgroundColor?: TColor;
   children: ReactNode;
 };
 
