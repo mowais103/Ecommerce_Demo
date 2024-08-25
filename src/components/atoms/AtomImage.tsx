@@ -12,7 +12,7 @@ type AtomImageProps = {
 };
 
 const AtomImage = ({wrapStyle, src, imgStyle, noRadius}: AtomImageProps) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const renderLoadingPlaceholder = () => (
     <SkeletonPlaceholder>
@@ -29,17 +29,19 @@ const AtomImage = ({wrapStyle, src, imgStyle, noRadius}: AtomImageProps) => {
     </SkeletonPlaceholder>
   );
 
-  return !loading ? (
-    <AtomView style={wrapStyle}>
-      <Image
-        source={{uri: src}}
-        style={imgStyle}
-        resizeMode="cover"
-        onLoad={() => setLoading(false)}
-      />
-    </AtomView>
-  ) : (
-    renderLoadingPlaceholder()
+  return (
+    <>
+      {loading ? renderLoadingPlaceholder() : null}
+      <AtomView style={wrapStyle}>
+        <Image
+          source={{uri: src}}
+          style={imgStyle}
+          resizeMode="cover"
+          onLoadStart={() => setLoading(true)}
+          onLoadEnd={() => setLoading(false)}
+        />
+      </AtomView>
+    </>
   );
 };
 
