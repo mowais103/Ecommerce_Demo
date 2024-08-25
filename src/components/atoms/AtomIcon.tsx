@@ -30,14 +30,14 @@ const AtomIcon = ({
   if (onPress) {
     return (
       <TouchableOpacity
-        style={[style, {...iconStyle}]}
+        style={[style, ...iconStyle]}
         hitSlop={20}
         {...rest}
         activeOpacity={0.7}
         onPress={onPress}>
         <Image
           resizeMode={resizeMode}
-          style={[{...iconStyle}, style]}
+          style={[...iconStyle, style]}
           source={Icons[icon]}
           {...rest}
         />

@@ -16,6 +16,8 @@ const Colors = {
   white: '#FFFFFF',
   black: '#000000',
   silver: '#A8B2AF',
+  grey: '#BABFBE',
+  red: '#FF0000',
 };
 
 const FontSizes: Record<TFontSize, number> = {

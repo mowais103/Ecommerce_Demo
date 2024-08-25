@@ -25,7 +25,6 @@ const DEFAULT_DEBOUNCE_TIME = 100;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
   },
   contentContainerStyle: {
     flexGrow: 1,
@@ -38,6 +37,7 @@ type AtomViewProps = ViewProps &
     onPress?: () => void;
     flex?: ViewStyle['flex'];
     flexDirection?: ViewStyle['flexDirection'];
+    flexWrap?: ViewStyle['flexWrap'];
     justifyContent?: ViewStyle['justifyContent'];
     alignItems?: ViewStyle['alignItems'];
     backgroundColor?: TColor;
@@ -47,6 +47,7 @@ type AtomViewProps = ViewProps &
     borderWidth?: number;
     borderRadius?: TSpacing;
     activeOpacity?: TouchableOpacityProps['activeOpacity'];
+    opacity?: ViewStyle['opacity'];
     position?: ViewStyle['position'];
     top?: ViewStyle['top'];
     bottom?: ViewStyle['bottom'];
@@ -81,12 +82,20 @@ const AtomView = memo(
     pH,
     pT,
     backgroundColor,
+    flex,
+    flexWrap,
+    flexDirection,
+    justifyContent,
+    alignItems,
     position,
+    width,
+    height,
     top,
     right,
     bottom,
     left,
     activeOpacity = 0.7,
+    opacity,
     debounceTime = DEFAULT_DEBOUNCE_TIME,
     scroll,
     scrollViewProps,
@@ -119,8 +128,41 @@ const AtomView = memo(
     if (backgroundColor) {
       viewStyle = {...viewStyle, backgroundColor: Colors[backgroundColor]};
     }
+
+    if (flexDirection) {
+      viewStyle = {...viewStyle, flexDirection};
+    }
+
+    if (alignItems) {
+      viewStyle = {...viewStyle, alignItems};
+    }
+
+    if (justifyContent) {
+      viewStyle = {...viewStyle, justifyContent};
+    }
+
+    if (flex) {
+      viewStyle = {...viewStyle, flex};
+    }
+
+    if (flexWrap) {
+      viewStyle = {...viewStyle, flexWrap};
+    }
+
+    if (width) {
+      viewStyle = {...viewStyle, width};
+    }
+
+    if (height) {
+      viewStyle = {...viewStyle, height};
+    }
+
     if (borderRadius) {
       viewStyle = {...viewStyle, borderRadius: STDSpacing[borderRadius]};
+    }
+
+    if (opacity) {
+      viewStyle = {...viewStyle, opacity};
     }
 
     if (position) {
@@ -133,6 +175,7 @@ const AtomView = memo(
         top: top,
       };
     }
+
     if (borderColor) {
       viewStyle = {
         ...viewStyle,
@@ -153,7 +196,7 @@ const AtomView = memo(
       debouncedPress(event);
 
     const renderBody = () => (
-      <View style={[style, viewStyle]} {...rest}>
+      <View style={[style, {...viewStyle}]} {...rest}>
         {children}
       </View>
     );
@@ -174,8 +217,8 @@ const AtomView = memo(
 
     return onPress ? (
       <TouchableOpacity
-        style={[style, viewStyle]}
         {...rest}
+        style={[style, {...viewStyle}]}
         onPress={handleOnPress}
         activeOpacity={activeOpacity}>
         {children}

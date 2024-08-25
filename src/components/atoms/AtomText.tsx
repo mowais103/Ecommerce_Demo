@@ -3,12 +3,10 @@ import {FlexStyle, Text, TextProps, TextStyle} from 'react-native';
 import {TColor, TFontSize, TSpacing} from '../../types/common';
 import {Colors, FontSizes, STDSpacing} from '../../styles/common';
 
-type AtomTextProps = TextProps & {
+export type AtomTextProps = TextProps & {
   size?: TFontSize;
   text: string | React.ReactNode;
   color?: TColor;
-  bold?: boolean;
-  semiBold?: boolean;
   textAlign?: TextStyle['textAlign'];
   pL?: TSpacing;
   pR?: TSpacing;
@@ -22,6 +20,8 @@ type AtomTextProps = TextProps & {
   letterSpacing?: TextStyle['letterSpacing'];
   alignSelf?: FlexStyle['alignSelf'];
   fontFamily?: TextStyle['fontFamily'];
+  fontWeight?: TextStyle['fontWeight'];
+  textTransform?: TextStyle['textTransform'];
   useOswald?: boolean;
 };
 
@@ -37,16 +37,18 @@ const AtomText = React.memo(
     pR,
     pT,
     pV,
+    flex,
+    alignSelf,
+    textTransform,
+    fontWeight = '300',
     textAlign = 'left',
     underline,
-    bold,
     style,
-    semiBold,
-    useOswald,
+    letterSpacing,
     ...rest
   }: AtomTextProps) => {
     let textStyle: TextStyle = {
-      fontFamily: useOswald ? 'Oswald-Regular' : undefined,
+      fontFamily: 'Oswald',
     };
 
     if (pL) {
@@ -74,25 +76,42 @@ const AtomText = React.memo(
     if (size) {
       textStyle = {...textStyle, fontSize: FontSizes[size]};
     }
+
+    if (alignSelf) {
+      textStyle = {...textStyle, alignSelf};
+    }
+
+    if (flex) {
+      textStyle = {...textStyle, flex};
+    }
+
     if (color) {
       textStyle = {...textStyle, color: Colors[color]};
     }
-    if (bold || semiBold) {
+    if (fontWeight) {
       textStyle = {
         ...textStyle,
-        fontWeight: useOswald ? undefined : bold ? 'bold' : '600',
-        fontFamily: useOswald ? 'Oswald-Bold' : undefined,
+        fontWeight,
       };
     }
     if (textAlign) {
       textStyle = {...textStyle, textAlign};
     }
+
+    if (textTransform) {
+      textStyle = {...textStyle, textTransform};
+    }
+
     if (underline) {
       textStyle = {...textStyle, textDecorationLine: 'underline'};
     }
 
+    if (letterSpacing) {
+      textStyle = {...textStyle, letterSpacing};
+    }
+
     return (
-      <Text style={[style, textStyle]} {...rest}>
+      <Text style={[style, {...textStyle}]} {...rest}>
         {text}
       </Text>
     );
