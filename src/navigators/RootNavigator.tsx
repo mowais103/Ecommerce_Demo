@@ -1,23 +1,26 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../types/navTypes';
-import {HomeScreen} from '../screens/HomeScreen/HomeScreen';
-import {COMMON_HEADER_OPTIONS} from '../styles/constants';
+import {TabNavigator} from './TabNavigator';
+import {SignInScreen} from '../screens/SignInScreen/SignInScreen';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
+  const isSignedIn = true; // add logic here later
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
-      screenOptions={{
-        ...COMMON_HEADER_OPTIONS,
-      }}>
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{headerTitle: 'SHOP BUDDY'}}
-      />
+      initialRouteName="SignInScreen"
+      screenOptions={{headerShown: false}}>
+      {!isSignedIn ? (
+        <>
+          <Stack.Screen name="SignInScreen" component={SignInScreen} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };
