@@ -53,6 +53,7 @@ type AtomViewProps = ViewProps &
     bottom?: ViewStyle['bottom'];
     right?: ViewStyle['right'];
     left?: ViewStyle['left'];
+    zIndex?: ViewStyle['zIndex'];
     hasShadow?: boolean;
     shadowColor?: TColor;
     pL?: TSpacing;
@@ -62,6 +63,13 @@ type AtomViewProps = ViewProps &
     pAll?: TSpacing;
     pH?: TSpacing;
     pV?: TSpacing;
+    mL?: TSpacing;
+    mR?: TSpacing;
+    mT?: TSpacing;
+    mB?: TSpacing;
+    mAll?: TSpacing;
+    mH?: TSpacing;
+    mV?: TSpacing;
     debounceTime?: number;
     scroll?: boolean;
     scrollViewProps?: ScrollViewProps;
@@ -81,6 +89,13 @@ const AtomView = memo(
     pV,
     pH,
     pT,
+    mAll,
+    mB,
+    mH,
+    mL,
+    mR,
+    mT,
+    mV,
     backgroundColor,
     flex,
     flexWrap,
@@ -88,6 +103,7 @@ const AtomView = memo(
     justifyContent,
     alignItems,
     position,
+    zIndex,
     width,
     height,
     top,
@@ -125,6 +141,33 @@ const AtomView = memo(
     if (pV) {
       viewStyle = {...viewStyle, paddingVertical: STDSpacing[pV]};
     }
+
+    if (mL) {
+      viewStyle = {...viewStyle, marginLeft: STDSpacing[mL]};
+    }
+    if (mR) {
+      viewStyle = {...viewStyle, marginRight: STDSpacing[mR]};
+    }
+    if (mT) {
+      viewStyle = {...viewStyle, marginTop: STDSpacing[mT]};
+    }
+    if (mB) {
+      viewStyle = {...viewStyle, marginBottom: STDSpacing[mB]};
+    }
+    if (mAll) {
+      viewStyle = {...viewStyle, margin: STDSpacing[mAll]};
+    }
+    if (mH) {
+      viewStyle = {...viewStyle, marginHorizontal: STDSpacing[mH]};
+    }
+    if (mV) {
+      viewStyle = {...viewStyle, marginVertical: STDSpacing[mV]};
+    }
+
+    if (zIndex) {
+      viewStyle = {...viewStyle, zIndex};
+    }
+
     if (backgroundColor) {
       viewStyle = {...viewStyle, backgroundColor: Colors[backgroundColor]};
     }

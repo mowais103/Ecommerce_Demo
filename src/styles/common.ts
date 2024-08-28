@@ -1,7 +1,14 @@
-import {Platform, ScrollViewProps} from 'react-native';
+import {
+  Dimensions,
+  FlatListProps,
+  Platform,
+  ScrollViewProps,
+} from 'react-native';
 import {TFontSize, TIconSize, TSpacing} from '../types/common';
 
-export const IS_IOS = Platform.OS === 'ios';
+const IS_IOS = Platform.OS === 'ios';
+
+const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT} = Dimensions.get('window');
 
 const DEFAULT_SCROLL_VIEW_PROPS: Pick<
   ScrollViewProps,
@@ -9,6 +16,13 @@ const DEFAULT_SCROLL_VIEW_PROPS: Pick<
 > = {
   showsVerticalScrollIndicator: false,
   showsHorizontalScrollIndicator: false,
+};
+
+const SNAPPING_FULL_SCREEN_FLAT_LIST_PROPS: Partial<FlatListProps<any>> = {
+  overScrollMode: 'never',
+  decelerationRate: 'fast',
+  snapToAlignment: 'center',
+  snapToInterval: WINDOW_WIDTH,
 };
 
 const Colors = {
@@ -30,6 +44,7 @@ const FontSizes: Record<TFontSize, number> = {
 };
 
 const STDSpacing: Record<TSpacing, number> = {
+  xxs: 4,
   xs: 5,
   small: 8,
   medium: 16,
@@ -43,4 +58,14 @@ const IconSizes: Record<TIconSize, number> = {
   large: 20,
 };
 
-export {Colors, FontSizes, STDSpacing, DEFAULT_SCROLL_VIEW_PROPS, IconSizes};
+export {
+  Colors,
+  FontSizes,
+  STDSpacing,
+  DEFAULT_SCROLL_VIEW_PROPS,
+  IconSizes,
+  IS_IOS,
+  WINDOW_WIDTH,
+  WINDOW_HEIGHT,
+  SNAPPING_FULL_SCREEN_FLAT_LIST_PROPS,
+};

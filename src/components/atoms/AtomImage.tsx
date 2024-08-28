@@ -30,9 +30,9 @@ const AtomImage = ({wrapStyle, src, imgStyle, noRadius}: AtomImageProps) => {
   );
 
   return (
-    <>
+    <AtomView flexDirection="row" style={wrapStyle}>
       {loading ? renderLoadingPlaceholder() : null}
-      <AtomView style={wrapStyle}>
+      {src ? (
         <Image
           source={{uri: src}}
           style={imgStyle}
@@ -40,8 +40,8 @@ const AtomImage = ({wrapStyle, src, imgStyle, noRadius}: AtomImageProps) => {
           onLoadStart={() => setLoading(true)}
           onLoadEnd={() => setLoading(false)}
         />
-      </AtomView>
-    </>
+      ) : null}
+    </AtomView>
   );
 };
 

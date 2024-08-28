@@ -10,7 +10,7 @@ type TStandardSizes =
   | 'xl'
   | 'xxl';
 
-type TSpacing = Exclude<TStandardSizes, 'xxs' | 'xxl'>;
+type TSpacing = Exclude<TStandardSizes, 'xxl'>;
 
 type TColor = keyof typeof Colors;
 type TIcons = keyof typeof Icons;
