@@ -1,12 +1,13 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
+import {AtomText} from '../../components/atoms/AtomText';
 
 const HomeScreen = () => {
   console.log('hello');
   return (
-    <View>
-      <Text>{'Hello'}</Text>
-    </View>
+    <AtomScreenContainer>
+      <AtomText text={'Hello'} />
+    </AtomScreenContainer>
   );
 };
 
