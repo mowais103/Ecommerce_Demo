@@ -2,7 +2,6 @@ import React, {useCallback, useRef, useState} from 'react';
 import {
   Animated,
   FlatListProps,
-  ImageStyle,
   LayoutAnimation,
   NativeSyntheticEvent,
   StyleProp,
@@ -19,17 +18,9 @@ import {
 export interface IAtomCarouselProps extends FlatListProps<any> {
   showDots?: boolean;
   useSquares?: boolean;
-  containerStyle: StyleProp<ViewStyle>;
-  loadingStyle: StyleProp<ImageStyle>;
-  dotContainerStyle: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   loop?: boolean;
-  inverseDots?: boolean;
-  dotsAtTop?: boolean;
-  transparentSquares?: boolean;
-  isPdp?: boolean;
   data: any[];
-  setActiveIndex?: (activeIndex: number) => void;
-  onScroll?: (event: NativeSyntheticEvent<any>) => void;
   renderBelowFlatList?: () => React.ReactNode;
 }
 

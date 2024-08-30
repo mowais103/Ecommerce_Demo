@@ -17,6 +17,6 @@ type TIcons = keyof typeof Icons;
 
 type TFontSize = Exclude<TStandardSizes, 'xxs'>;
 
-type TIconSize = Exclude<TStandardSizes, 'xxs' | 'xs' | 'xl' | 'xxl'>;
+type TIconSize = Exclude<TStandardSizes, 'xxs' | 'xs'>;
 
 export type {TSpacing, TColor, TFontSize, TStandardSizes, TIconSize, TIcons};
