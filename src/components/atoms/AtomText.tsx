@@ -16,13 +16,13 @@ export type AtomTextProps = TextProps & {
   pH?: TSpacing;
   pV?: TSpacing;
   underline?: boolean;
+  lineThrough?: boolean;
   flex?: TextStyle['flex'];
   letterSpacing?: TextStyle['letterSpacing'];
   alignSelf?: FlexStyle['alignSelf'];
   fontFamily?: TextStyle['fontFamily'];
   fontWeight?: TextStyle['fontWeight'];
   textTransform?: TextStyle['textTransform'];
-  useOswald?: boolean;
 };
 
 const AtomText = React.memo(
@@ -41,18 +41,22 @@ const AtomText = React.memo(
     alignSelf,
     textTransform,
     fontWeight = '300',
+    fontFamily = 'Oswald',
     textAlign = 'left',
     underline,
+    lineThrough,
     style,
     letterSpacing,
     ...rest
   }: AtomTextProps) => {
-    let textStyle: TextStyle = {
-      fontFamily: 'Oswald',
-    };
+    let textStyle = {};
+
+    if (fontFamily) {
+      textStyle = {...textStyle, fontFamily};
+    }
 
     if (pL) {
-      textStyle = {paddingLeft: STDSpacing[pL]};
+      textStyle = {...textStyle, paddingLeft: STDSpacing[pL]};
     }
     if (pR) {
       textStyle = {...textStyle, paddingRight: STDSpacing[pR]};
@@ -104,6 +108,10 @@ const AtomText = React.memo(
 
     if (underline) {
       textStyle = {...textStyle, textDecorationLine: 'underline'};
+    }
+
+    if (lineThrough) {
+      textStyle = {...textStyle, textDecorationLine: 'line-through'};
     }
 
     if (letterSpacing) {

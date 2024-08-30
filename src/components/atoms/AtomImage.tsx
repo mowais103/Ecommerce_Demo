@@ -5,13 +5,11 @@ import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 type AtomImageProps = {
   src: string;
-  wrapStyle?: StyleProp<ViewStyle>;
-  imgStyle?: ImageStyle;
-  noRadius?: boolean;
-  loading?: boolean;
+  wrapStyle: StyleProp<ViewStyle>;
+  imgStyle: ImageStyle;
 };
 
-const AtomImage = ({wrapStyle, src, imgStyle, noRadius}: AtomImageProps) => {
+const AtomImage = ({wrapStyle, src, imgStyle}: AtomImageProps) => {
   const [loading, setLoading] = useState(false);
 
   const renderLoadingPlaceholder = () => (
@@ -21,9 +19,10 @@ const AtomImage = ({wrapStyle, src, imgStyle, noRadius}: AtomImageProps) => {
         alignItems="center"
         justifyContent="center">
         <SkeletonPlaceholder.Item
+          aspectRatio={imgStyle?.aspectRatio}
           width={imgStyle?.width}
           height={imgStyle?.height}
-          borderRadius={noRadius ? 0 : 10}
+          borderRadius={imgStyle?.borderRadius}
         />
       </SkeletonPlaceholder.Item>
     </SkeletonPlaceholder>

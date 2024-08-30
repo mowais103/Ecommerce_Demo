@@ -9,14 +9,13 @@ const HEADER_TITLE_STYLE: StyleProp<
 > = {
   fontSize: FontSizes.medium,
   color: Colors.white,
-  fontFamily: 'Oswald-Regular',
+  fontFamily: 'Oswald',
 };
 
 const COMMON_HEADER_OPTIONS: NativeStackNavigationOptions = {
   headerBackTitleVisible: false,
   headerTitleStyle: HEADER_TITLE_STYLE,
   headerStyle: {backgroundColor: Colors.pineGreen},
-  headerTintColor: Colors.silver,
   headerTitleAlign: 'center',
 };
 

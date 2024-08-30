@@ -7,6 +7,8 @@ const Icons = {
   favoriteInActive: require('./icons/favoriteInActive.png'),
   homeActive: require('./icons/homeActive.png'),
   collectionInActive: require('./icons/collectionInActive.png'),
+  arrowBack: require('./icons/arrowBack.png'),
+  arrowRight: require('./icons/arrowRight.png'),
 };
 
 export {Icons};

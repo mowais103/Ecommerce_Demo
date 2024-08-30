@@ -19,9 +19,9 @@ const DEFAULT_SCROLL_VIEW_PROPS: Pick<
 };
 
 const SNAPPING_FULL_SCREEN_FLAT_LIST_PROPS: Partial<FlatListProps<any>> = {
-  overScrollMode: 'never',
+  overScrollMode: 'auto',
   decelerationRate: 'fast',
-  snapToAlignment: 'center',
+  snapToAlignment: 'start',
   snapToInterval: WINDOW_WIDTH,
 };
 
@@ -32,6 +32,7 @@ const Colors = {
   silver: '#A8B2AF',
   grey: '#BABFBE',
   red: '#FF0000',
+  coffeeBrown: '#4C262E',
 };
 
 const FontSizes: Record<TFontSize, number> = {
@@ -56,6 +57,8 @@ const IconSizes: Record<TIconSize, number> = {
   small: 12,
   medium: 16,
   large: 20,
+  xl: 24,
+  xxl: 32,
 };
 
 export {
