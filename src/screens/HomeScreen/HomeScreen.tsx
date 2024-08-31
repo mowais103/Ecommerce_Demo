@@ -1,17 +1,16 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
 import {CarouselSlider} from '../../components/molecules/CarouselSlider/CarouselSlider';
 import {AtomImage} from '../../components/atoms/AtomImage';
 import {WINDOW_WIDTH} from '../../styles/common';
 import {AtomView} from '../../components/atoms/AtomView';
-import {CollectionCard} from '../../components/molecules/CollectionCard';
-import {AppBanner} from '../../components/molecules/AppBanner';
 import {ProductCard} from '../../components/molecules/ProductCard';
 import {ListHeader} from '../../components/molecules/ListHeader';
 import Video from 'react-native-video';
+import {Endpoints, getData} from '../../async';
 
 const video_url =
-  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4';
+  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4';
 
 const data = [
   {
@@ -45,8 +44,21 @@ const data = [
 ];
 
 const HomeScreen = () => {
+  const [newArrivals, setNewArrivals] = useState<any>([]);
+
+  const fetchNewArrivals = useCallback(async () => {
+    const res = await getData(Endpoints.getNewArrivals);
+    if (res) {
+      setNewArrivals(res?.products ?? []);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchNewArrivals();
+  }, [fetchNewArrivals]);
+
   const renderCarouselItem = useCallback(
-    ({item}) => (
+    ({item}: any) => (
       <AtomImage
         src={item.image}
         wrapStyle={{width: WINDOW_WIDTH}}
@@ -71,28 +83,25 @@ const HomeScreen = () => {
         />
         <AtomView pAll="small">
           <ListHeader title={data[0].title} icon="arrowRight" />
-          <ProductCard data={data} />
-          <ListHeader title={data[1].title} icon="arrowRight" />
-          <CollectionCard data={data} />
-          <AppBanner image="https://picsum.photos/1800/1400" />
-          <ListHeader title={data[2].title} icon="arrowRight" />
-          <ProductCard data={data} />
+          <ProductCard data={newArrivals} />
         </AtomView>
 
-        <Video
-          source={{
-            uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-          }}
-          paused={false}
-          repeat={true}
-          muted={true}
-          style={{
-            width: WINDOW_WIDTH,
-            height: WINDOW_WIDTH / 1,
-          }}
-          onError={e => console.log(e)}
-          poster={'https://picsum.photos/seed/picsum/1800/1400'}
-        />
+        {!__DEV__ ? (
+          <Video
+            source={{
+              uri: video_url,
+            }}
+            paused={false}
+            repeat={true}
+            muted={true}
+            style={{
+              width: WINDOW_WIDTH,
+              height: WINDOW_WIDTH / 1,
+            }}
+            onError={e => console.log(e)}
+            poster={'https://picsum.photos/seed/picsum/1800/1400'}
+          />
+        ) : null}
       </AtomView>
     </AtomScreenContainer>
   );

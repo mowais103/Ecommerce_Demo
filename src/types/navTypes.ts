@@ -13,19 +13,20 @@ type BottomTabParamList = {
   Cart: undefined;
 };
 
-type HomeTabParamList = {
+type HomeStackParamList = {
+  HomeScreen: undefined;
+  ProductDetail?: {productId: string};
+};
+
+type CollectionsStackParamList = {
   HomeScreen: undefined;
 };
 
-type CollectionsTabParamList = {
+type CartStackParamList = {
   HomeScreen: undefined;
 };
 
-type CartTabParamList = {
-  HomeScreen: undefined;
-};
-
-type FavoritesTabParamList = {
+type FavoritesStackParamList = {
   HomeScreen: undefined;
 };
 
@@ -37,15 +38,21 @@ type BottomTabNavigation = NavigationProp<BottomTabParamList>;
 type BottomTabScreenProps<T extends keyof BottomTabParamList> =
   NativeStackScreenProps<BottomTabParamList, T>;
 
+type HomeStackNavigation = NavigationProp<RootStackParamList>;
+type HomeStackScreenProps<T extends keyof HomeStackParamList> =
+  NativeStackScreenProps<HomeStackParamList, T>;
+
 export type {
   RootStackParamList,
   RootNavigation,
   RootStackScreenProps,
   BottomTabParamList,
-  HomeTabParamList,
-  CollectionsTabParamList,
-  CartTabParamList,
-  FavoritesTabParamList,
+  HomeStackParamList,
+  CollectionsStackParamList,
+  CartStackParamList,
+  FavoritesStackParamList,
   BottomTabNavigation,
   BottomTabScreenProps,
+  HomeStackNavigation,
+  HomeStackScreenProps,
 };

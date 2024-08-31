@@ -33,6 +33,7 @@ const Colors = {
   grey: '#BABFBE',
   red: '#FF0000',
   coffeeBrown: '#4C262E',
+  lightGrey: '#F5F4F3',
 };
 
 const FontSizes: Record<TFontSize, number> = {
