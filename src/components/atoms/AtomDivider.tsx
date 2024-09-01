@@ -5,7 +5,7 @@ import {TColor} from '../../types/common';
 
 const Divider = ({color, height}: {color?: TColor; height?: number}) => (
   <AtomView
-    height={height ?? StyleSheet.hairlineWidth}
+    height={height ?? StyleSheet.hairlineWidth * 2}
     width={'100%'}
     backgroundColor={color ?? 'silver'}
   />

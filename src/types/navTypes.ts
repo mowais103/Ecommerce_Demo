@@ -4,6 +4,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 type RootStackParamList = {
   SignInScreen: undefined;
   TabNavigator: undefined;
+  ProductDetail: {productId: string};
 };
 
 type BottomTabParamList = {
@@ -13,19 +14,19 @@ type BottomTabParamList = {
   Cart: undefined;
 };
 
-type HomeTabParamList = {
+type HomeStackParamList = {
   HomeScreen: undefined;
 };
 
-type CollectionsTabParamList = {
+type CollectionsStackParamList = {
   HomeScreen: undefined;
 };
 
-type CartTabParamList = {
+type CartStackParamList = {
   HomeScreen: undefined;
 };
 
-type FavoritesTabParamList = {
+type FavoritesStackParamList = {
   HomeScreen: undefined;
 };
 
@@ -37,15 +38,21 @@ type BottomTabNavigation = NavigationProp<BottomTabParamList>;
 type BottomTabScreenProps<T extends keyof BottomTabParamList> =
   NativeStackScreenProps<BottomTabParamList, T>;
 
+type HomeStackNavigation = NavigationProp<RootStackParamList>;
+type HomeStackScreenProps<T extends keyof HomeStackParamList> =
+  NativeStackScreenProps<HomeStackParamList, T>;
+
 export type {
   RootStackParamList,
   RootNavigation,
   RootStackScreenProps,
   BottomTabParamList,
-  HomeTabParamList,
-  CollectionsTabParamList,
-  CartTabParamList,
-  FavoritesTabParamList,
+  HomeStackParamList,
+  CollectionsStackParamList,
+  CartStackParamList,
+  FavoritesStackParamList,
   BottomTabNavigation,
   BottomTabScreenProps,
+  HomeStackNavigation,
+  HomeStackScreenProps,
 };
