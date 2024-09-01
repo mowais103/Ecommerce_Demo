@@ -13,48 +13,21 @@ import {Divider} from '../../components/atoms/AtomDivider';
 const video_url =
   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4';
 
-const data = [
-  {
-    title: 'Explore Nature',
-    description:
-      'Discover the beauty of nature with breathtaking landscapes and stunning views.',
-    image: 'https://picsum.photos/1800/1400',
-    color: '#f72585',
-  },
-  {
-    title: 'Adventure Awaits',
-    description:
-      'Embark on thrilling adventures and create unforgettable memories.',
-    image: 'https://picsum.photos/1800/1400',
-    color: '#4361ee',
-  },
-  {
-    title: 'Relax and Unwind',
-    description:
-      'Indulge in relaxation and find inner peace in serene and tranquil environments.',
-    image: 'https://picsum.photos/1800/1400',
-    color: '#4cc9f0',
-  },
-  {
-    title: 'Relax and Unwind',
-    description:
-      'Indulge in relaxation and find inner peace in serene and tranquil environments.',
-    image: 'https://picsum.photos/1800/1400',
-    color: '#4cc9f0',
-  },
-];
-
 const HomeScreen = () => {
   const [newArrivals, setNewArrivals] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchNewArrivals = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await getData(`${Endpoints.getProducts}?limit=10`);
       if (res?.products) {
         setNewArrivals(res?.products);
+        setLoading(false);
       }
     } catch (e) {
       console.warn(e);
+      setLoading(false);
     }
   }, []);
 
@@ -75,6 +48,10 @@ const HomeScreen = () => {
     ),
     [],
   );
+
+  if (loading) {
+    return;
+  }
 
   return (
     <AtomScreenContainer>

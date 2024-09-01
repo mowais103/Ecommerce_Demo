@@ -20,16 +20,21 @@ type ProductDetailProps = {
 const ProductDetail = ({route}: ProductDetailProps) => {
   const [product, setProduct] = useState<any>({});
   const [showProductDetails, setShowProductDetails] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+
   const {productId} = route.params;
 
   const fetchProductById = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await getData(`${Endpoints.getProducts}/${productId}`);
       if (res) {
         setProduct(res);
+        setLoading(false);
       }
     } catch (e) {
       console.warn(e);
+      setLoading(false);
     }
   }, [productId]);
 
@@ -71,6 +76,10 @@ const ProductDetail = ({route}: ProductDetailProps) => {
 
   const addToCart = () => console.log('jjjjj');
 
+  if (loading) {
+    return;
+  }
+
   return (
     <AtomScreenContainer>
       <AtomView scroll={true}>
@@ -105,13 +114,13 @@ const ProductDetail = ({route}: ProductDetailProps) => {
           <AtomView flexDirection="row" flexWrap="wrap" pV="small">
             {renderPill()}
           </AtomView>
-          <AtomText
-            text={product.availabilityStatus}
-            color="black30"
-            fontWeight={'semibold'}
-            pT="small"
-          />
         </AtomView>
+        <AtomText
+          text={product.availabilityStatus}
+          color={product.availabilityStatus === 'In Stock' ? 'black30' : 'red'}
+          fontWeight={'semibold'}
+          pL="medium"
+        />
         <Description
           description={product.description}
           showProductDetails={showProductDetails}
