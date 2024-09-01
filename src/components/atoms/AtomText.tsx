@@ -46,7 +46,7 @@ const AtomText = React.memo(
     underline,
     lineThrough,
     style,
-    letterSpacing,
+    letterSpacing = 1,
     ...rest
   }: AtomTextProps) => {
     let textStyle = {};
