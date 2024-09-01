@@ -18,7 +18,7 @@ const PagingIndicator = ({
   onChange,
   useSquare,
   activeDotColor = 'pineGreen',
-  inActiveDotColor = 'white',
+  inActiveDotColor = 'grey',
 }: PagingIndicatorProps) => {
   return (
     <AtomView flexDirection="row" position="absolute" bottom={10}>

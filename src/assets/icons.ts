@@ -9,6 +9,8 @@ const Icons = {
   collectionInActive: require('./icons/collectionInActive.png'),
   arrowBack: require('./icons/arrowBack.png'),
   arrowRight: require('./icons/arrowRight.png'),
+  triangleDown: require('./icons/triangleDown.png'),
+  triangleUp: require('./icons/triangleUp.png'),
 };
 
 export {Icons};

@@ -126,7 +126,7 @@ const CarouselSlider = ({
         }}
         scrollEventThrottle={16}
         ref={flatListRef}
-        initialNumToRender={Math.min(data.length, 3)}
+        initialNumToRender={Math.min(data.length, 5)}
         pagingEnabled={getPagingEnabled()}
         bounces={false}
         horizontal={horizontal}

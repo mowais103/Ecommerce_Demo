@@ -30,9 +30,12 @@ const Description = ({
 }: DescriptionProps) => {
   return (
     <AtomView style={styles.container} onPress={onPress}>
-      <ListHeader title="Product Details" />
+      <ListHeader
+        title="Product Details"
+        icon={showProductDetails ? 'triangleDown' : 'triangleUp'}
+      />
       {showProductDetails ? (
-        <AtomText text={description} size="small" pV="xs" numberOfLines={3} />
+        <AtomText text={description} pV="small" size="small" />
       ) : null}
     </AtomView>
   );
