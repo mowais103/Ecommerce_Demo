@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react';
 import {Image} from 'react-native';
 
 const useImageAspectRatio = (imageUrl: string) => {
-  // Setting default aspect ratio to be 2.75
-  const [aspectRatio, setAspectRatio] = useState(2.75);
+  // Setting default aspect ratio to be 1
+  const [aspectRatio, setAspectRatio] = useState(1);
 
   useEffect(() => {
     if (!imageUrl) {

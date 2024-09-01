@@ -49,6 +49,7 @@ const AtomButton = ({
   return (
     <AtomView
       {...rest}
+      mAll="medium"
       opacity={disabled ? 0.3 : undefined}
       style={[style]}
       backgroundColor={backgroundColor}

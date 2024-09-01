@@ -8,4 +8,13 @@ const getIconDims = (size: TIconSize) => {
   return getSquareDims(IconSizes[size]);
 };
 
-export {getIconDims};
+const calculateOriginalPrice = (
+  discountedPrice: string,
+  discountPercentage: string,
+) => {
+  const originalPrice =
+    (Number(discountedPrice) * 100) / (100 - Number(discountPercentage));
+  return originalPrice.toFixed(2);
+};
+
+export {getIconDims, calculateOriginalPrice};
