@@ -3,7 +3,7 @@ import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles/common';
 import {AtomView} from '../atoms/AtomView';
 import {AtomCard} from '../atoms/AtomCard';
 import {AtomText} from '../atoms/AtomText';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useImageAspectRatio} from '../../lib/hooks';
 
@@ -11,18 +11,12 @@ type ProductCardProps = {
   data: any[];
 };
 
-const styles = StyleSheet.create({
-  img: {
-    width: WINDOW_WIDTH / 2.6,
-  },
-});
-
 const ItemSeparatorComponent = () => <AtomView pR="xs" />;
 
 const ProductCard = ({data}: ProductCardProps) => {
   const navigation = useNavigation();
 
-  const aspectRatio = useImageAspectRatio(data[0]?.thumbnail ?? '');
+  const aspectRatio = useImageAspectRatio(data[0]?.thumbnail ?? undefined);
 
   const renderProduct = useCallback(
     ({item}: any) => {
@@ -30,7 +24,7 @@ const ProductCard = ({data}: ProductCardProps) => {
         navigation.navigate('ProductDetail', {productId: item.id});
 
       const renderBelowCard = () => (
-        <AtomView style={styles.img} pV="small">
+        <AtomView width={WINDOW_WIDTH / 2.6} pV="small">
           <AtomText
             text={item.title}
             textAlign="center"
@@ -62,7 +56,7 @@ const ProductCard = ({data}: ProductCardProps) => {
         <AtomCard
           onPressCard={onPressCard}
           image={item.thumbnail}
-          wrapStyle={[styles.img, {aspectRatio}]}
+          wrapStyle={{width: WINDOW_WIDTH / 2.6}}
           imgStyle={{width: WINDOW_WIDTH / 2.6, aspectRatio}}
           renderBelowCard={renderBelowCard()}
         />

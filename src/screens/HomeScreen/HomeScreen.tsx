@@ -8,6 +8,7 @@ import {ProductCard} from '../../components/molecules/ProductCard';
 import {ListHeader} from '../../components/molecules/ListHeader';
 import Video from 'react-native-video';
 import {Endpoints, getData} from '../../async';
+import {Divider} from '../../components/atoms/AtomDivider';
 
 const video_url =
   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4';
@@ -47,9 +48,13 @@ const HomeScreen = () => {
   const [newArrivals, setNewArrivals] = useState<any>([]);
 
   const fetchNewArrivals = useCallback(async () => {
-    const res = await getData(Endpoints.getNewArrivals);
-    if (res) {
-      setNewArrivals(res?.products ?? []);
+    try {
+      const res = await getData(`${Endpoints.getProducts}?limit=10`);
+      if (res?.products) {
+        setNewArrivals(res?.products);
+      }
+    } catch (e) {
+      console.warn(e);
     }
   }, []);
 
@@ -60,11 +65,11 @@ const HomeScreen = () => {
   const renderCarouselItem = useCallback(
     ({item}: any) => (
       <AtomImage
-        src={item.image}
-        wrapStyle={{width: WINDOW_WIDTH}}
+        src={item.images[0]}
+        wrapStyle={{width: WINDOW_WIDTH, aspectRatio: 1}}
         imgStyle={{
           width: WINDOW_WIDTH,
-          aspectRatio: 1800 / 1400,
+          aspectRatio: 1,
         }}
       />
     ),
@@ -77,12 +82,14 @@ const HomeScreen = () => {
         <CarouselSlider
           loop={true}
           horizontal={true}
-          data={data}
+          data={newArrivals}
           renderItem={renderCarouselItem}
           showDots={true}
+          keyExtractor={(item, index) => `${item}-${index}`}
         />
-        <AtomView pAll="small">
-          <ListHeader title={data[0].title} icon="arrowRight" />
+        <Divider />
+        <AtomView pV="large" pH="medium">
+          <ListHeader title={'Shop New Arrivals'} icon="arrowRight" />
           <ProductCard data={newArrivals} />
         </AtomView>
 

@@ -7,8 +7,6 @@ import {Colors} from '../../styles/common';
 
 const ListHeader = ({title, icon}: {title: string; icon?: TIcons}) => (
   <AtomView
-    pH="xs"
-    pT="medium"
     flexDirection="row"
     justifyContent="space-between"
     alignItems="center">
@@ -17,7 +15,6 @@ const ListHeader = ({title, icon}: {title: string; icon?: TIcons}) => (
       textTransform={'uppercase'}
       color="coffeeBrown"
       fontWeight={'400'}
-      letterSpacing={1}
       size="medium"
     />
     <AtomIcon

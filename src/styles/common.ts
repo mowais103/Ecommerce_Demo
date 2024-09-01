@@ -34,6 +34,7 @@ const Colors = {
   red: '#FF0000',
   coffeeBrown: '#4C262E',
   lightGrey: '#F5F4F3',
+  black30: 'rgba(0, 0, 0, 0.3)',
 };
 
 const FontSizes: Record<TFontSize, number> = {
