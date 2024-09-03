@@ -1,40 +1,57 @@
-import React, {useState} from 'react';
-import {ViewStyle, StyleProp, ImageStyle, Image} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {
+  ViewStyle,
+  StyleProp,
+  ImageStyle,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import {AtomView} from './AtomView';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
+const styles = StyleSheet.create({
+  loadingImgStyle: {
+    zIndex: 1,
+    position: 'absolute',
+  },
+});
+
 type AtomImageProps = {
   src: string;
-  wrapStyle: StyleProp<ViewStyle>;
+  wrapStyle?: StyleProp<ViewStyle>;
   imgStyle: ImageStyle;
 };
 
 const AtomImage = ({wrapStyle, src, imgStyle}: AtomImageProps) => {
   const [loading, setLoading] = useState(false);
 
-  const renderLoadingPlaceholder = () => (
-    <SkeletonPlaceholder>
-      <SkeletonPlaceholder.Item
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center">
+  const renderLoadingPlaceholder = useCallback(
+    () => (
+      <SkeletonPlaceholder>
         <SkeletonPlaceholder.Item
-          aspectRatio={imgStyle?.aspectRatio}
-          width={imgStyle?.width}
-          height={imgStyle?.height}
-          borderRadius={imgStyle?.borderRadius}
-        />
-      </SkeletonPlaceholder.Item>
-    </SkeletonPlaceholder>
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center">
+          <SkeletonPlaceholder.Item
+            aspectRatio={imgStyle?.aspectRatio}
+            width={imgStyle?.width}
+            height={imgStyle?.height}
+            borderRadius={imgStyle?.borderRadius}
+            borderRightWidth={imgStyle?.borderRightWidth}
+          />
+        </SkeletonPlaceholder.Item>
+      </SkeletonPlaceholder>
+    ),
+    [imgStyle],
   );
 
   return (
-    <AtomView flexDirection="row" style={wrapStyle}>
+    <AtomView style={wrapStyle}>
       {loading ? renderLoadingPlaceholder() : null}
       {src ? (
         <Image
           source={{uri: src}}
-          style={imgStyle}
+          style={[imgStyle, loading ? styles.loadingImgStyle : null]}
           resizeMode="cover"
           onLoadStart={() => setLoading(true)}
           onLoadEnd={() => setLoading(false)}
