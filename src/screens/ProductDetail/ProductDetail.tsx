@@ -47,34 +47,61 @@ const ProductDetail = ({route}: ProductDetailProps) => {
       <AtomView>
         <AtomImage
           src={item}
-          wrapStyle={{width: WINDOW_WIDTH}}
-          imgStyle={{width: WINDOW_WIDTH, aspectRatio: 1}}
+          imgStyle={{width: WINDOW_WIDTH, aspectRatio: 0.8}}
         />
         <Divider />
       </AtomView>
     );
   }, []);
 
+  const originalPrice = calculateOriginalPrice(
+    product.price,
+    product.discountPercentage,
+  );
+
+  // push brand names at start of tags array
   const newTagArray = useMemo(() => {
     const tags = product?.tags ?? [];
     const brand = product?.brand ? [product.brand] : [];
     return [...brand, ...tags];
   }, [product?.brand, product?.tags]);
 
-  const renderPill = useCallback(
-    () =>
-      newTagArray.map((tag: string, index: number) => (
-        <Pill key={index} name={tag} />
-      )),
+  const renderPills = useCallback(
+    () => (
+      <AtomView scroll={true} horizontal={true} flexDirection="row">
+        {newTagArray.map((tag: string, index: number) => (
+          <Pill key={index} name={tag} />
+        ))}
+      </AtomView>
+    ),
     [newTagArray],
   );
 
-  const originalPrice = calculateOriginalPrice(
-    product.price,
-    product.discountPercentage,
-  );
-
   const addToCart = () => console.log('jjjjj');
+
+  const renderProductDetails = useCallback(
+    () => (
+      <AtomView pAll="medium" flex={1}>
+        <AtomText
+          text={product.title}
+          pB="small"
+          textTransform="uppercase"
+          fontWeight={'500'}
+        />
+        <AtomView flexDirection="row" pB="medium">
+          <AtomText text={`$${product.price}`} pR="medium" fontWeight={'400'} />
+          <AtomText
+            text={`$${originalPrice}`}
+            lineThrough={true}
+            color="black30"
+            fontWeight={'semibold'}
+          />
+        </AtomView>
+        {renderPills()}
+      </AtomView>
+    ),
+    [originalPrice, product.price, product.title, renderPills],
+  );
 
   if (loading) {
     return;
@@ -91,30 +118,7 @@ const ProductDetail = ({route}: ProductDetailProps) => {
           showDots={true}
           keyExtractor={(item, index) => `${item}-${index}`}
         />
-        <AtomView pAll="medium">
-          <AtomText
-            text={product.title}
-            pB="small"
-            textTransform="uppercase"
-            fontWeight={'500'}
-          />
-          <AtomView flexDirection="row" pB="medium">
-            <AtomText
-              text={`$${product.price}`}
-              pR="medium"
-              fontWeight={'400'}
-            />
-            <AtomText
-              text={`$${originalPrice}`}
-              lineThrough={true}
-              color="black30"
-              fontWeight={'semibold'}
-            />
-          </AtomView>
-          <AtomView flexDirection="row" flexWrap="wrap" pV="small">
-            {renderPill()}
-          </AtomView>
-        </AtomView>
+        {renderProductDetails()}
         <AtomText
           text={product.availabilityStatus}
           color={product.availabilityStatus === 'In Stock' ? 'black30' : 'red'}
