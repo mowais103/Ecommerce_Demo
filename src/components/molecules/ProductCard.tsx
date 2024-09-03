@@ -14,9 +14,11 @@ type ProductCardProps = {
 const ItemSeparatorComponent = () => <AtomView pR="xs" />;
 
 const ProductCard = ({data}: ProductCardProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
-  const aspectRatio = useImageAspectRatio(data[0]?.thumbnail ?? undefined);
+  const aspectRatio = useImageAspectRatio(
+    data[0]?.thumbnail ? data[0]?.thumbnail : '',
+  );
 
   const renderProduct = useCallback(
     ({item}: any) => {
@@ -56,7 +58,6 @@ const ProductCard = ({data}: ProductCardProps) => {
         <AtomCard
           onPressCard={onPressCard}
           image={item.thumbnail}
-          wrapStyle={{width: WINDOW_WIDTH / 2.6}}
           imgStyle={{width: WINDOW_WIDTH / 2.6, aspectRatio}}
           renderBelowCard={renderBelowCard()}
         />
@@ -72,6 +73,7 @@ const ProductCard = ({data}: ProductCardProps) => {
       data={data}
       renderItem={renderProduct}
       ItemSeparatorComponent={ItemSeparatorComponent}
+      keyExtractor={(product, index) => `${product.id}-${index}`}
     />
   );
 };

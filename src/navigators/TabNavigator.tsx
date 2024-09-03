@@ -30,7 +30,6 @@ const TabBar = ({focused, route}: any) => {
     iconName = focused ? 'favoriteActive' : 'favoriteInActive';
   }
 
-  // You can return any component that you like here!
   return (
     <AtomView justifyContent="center" alignItems="center">
       <AtomIcon

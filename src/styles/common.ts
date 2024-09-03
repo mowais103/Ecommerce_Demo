@@ -34,6 +34,7 @@ const Colors = {
   red: '#FF0000',
   coffeeBrown: '#4C262E',
   lightGrey: '#F5F4F3',
+  brown: '#AC866B',
   black30: 'rgba(0, 0, 0, 0.3)',
 };
 
