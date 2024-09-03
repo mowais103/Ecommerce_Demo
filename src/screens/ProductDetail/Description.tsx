@@ -32,10 +32,15 @@ const Description = ({
     <AtomView style={styles.container} onPress={onPress}>
       <ListHeader
         title="Product Details"
-        icon={showProductDetails ? 'triangleDown' : 'triangleUp'}
+        icon={showProductDetails ? 'triangleUp' : 'triangleDown'}
       />
       {showProductDetails ? (
-        <AtomText text={description} pV="small" size="small" />
+        <AtomText
+          text={description}
+          pV="medium"
+          color="brown"
+          fontWeight={'400'}
+        />
       ) : null}
     </AtomView>
   );
