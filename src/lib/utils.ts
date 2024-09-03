@@ -17,4 +17,6 @@ const calculateOriginalPrice = (
   return originalPrice.toFixed(2);
 };
 
-export {getIconDims, calculateOriginalPrice};
+const roundOff = (val: number) => Math.round(Number(val));
+
+export {getIconDims, calculateOriginalPrice, roundOff};

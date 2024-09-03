@@ -7,6 +7,7 @@ import {ProductDetail} from '../screens/ProductDetail/ProductDetail';
 import {COMMON_HEADER_OPTIONS} from '../styles/constants';
 import {HeaderLeft} from '../components/molecules/HeaderLeft';
 import {useNavigation} from '@react-navigation/native';
+import {ProductListing} from '../screens/ProductListing/ProductListing';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,6 +37,11 @@ const RootNavigator = () => {
           <Stack.Screen
             name="ProductDetail"
             component={ProductDetail}
+            options={{headerTitle: 'SHOP BUDDY'}}
+          />
+          <Stack.Screen
+            name="ProductListing"
+            component={ProductListing}
             options={{headerTitle: 'SHOP BUDDY'}}
           />
         </>

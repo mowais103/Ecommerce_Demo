@@ -5,6 +5,7 @@ type RootStackParamList = {
   SignInScreen: undefined;
   TabNavigator: undefined;
   ProductDetail: {productId: string};
+  ProductListing: {url: string};
 };
 
 type BottomTabParamList = {

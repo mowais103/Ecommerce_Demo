@@ -5,22 +5,22 @@ import {ImageStyle, StyleProp, ViewStyle} from 'react-native';
 
 type AtomCardProps = {
   image: string;
-  wrapStyle: StyleProp<ViewStyle>;
   imgStyle: ImageStyle;
   renderBelowCard?: ReactNode;
   onPressCard?: () => void;
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 const AtomCard = ({
   image,
-  wrapStyle,
   imgStyle,
   renderBelowCard,
+  containerStyle,
   onPressCard,
 }: AtomCardProps) => {
   return (
-    <AtomView onPress={onPressCard} pV="small">
-      <AtomImage src={image} wrapStyle={wrapStyle} imgStyle={imgStyle} />
+    <AtomView onPress={onPressCard} style={containerStyle}>
+      <AtomImage src={image} imgStyle={imgStyle} />
       {renderBelowCard ? renderBelowCard : null}
     </AtomView>
   );

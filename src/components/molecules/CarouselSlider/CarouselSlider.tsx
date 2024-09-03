@@ -21,7 +21,6 @@ export interface IAtomCarouselProps extends FlatListProps<any> {
   containerStyle?: StyleProp<ViewStyle>;
   loop?: boolean;
   data: any[];
-  renderBelowFlatList?: () => React.ReactNode;
 }
 
 const CarouselSlider = ({

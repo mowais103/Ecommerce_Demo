@@ -73,6 +73,7 @@ type AtomViewProps = ViewProps &
     debounceTime?: number;
     scroll?: boolean;
     scrollViewProps?: ScrollViewProps;
+    horizontal?: boolean;
   };
 
 const AtomView = memo(
@@ -115,6 +116,7 @@ const AtomView = memo(
     debounceTime = DEFAULT_DEBOUNCE_TIME,
     scroll,
     scrollViewProps,
+    horizontal,
     style,
     ...rest
   }: AtomViewProps) => {
@@ -247,6 +249,7 @@ const AtomView = memo(
     if (scroll) {
       return (
         <KeyboardAwareScrollView
+          horizontal={horizontal}
           contentContainerStyle={styles.contentContainerStyle}
           {...DEFAULT_SCROLL_VIEW_PROPS}
           style={[styles.container, scrollViewProps && scrollViewProps.style]}
