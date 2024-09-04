@@ -3,15 +3,23 @@ import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles/common';
 import {AtomView} from '../atoms/AtomView';
 import {AtomCard} from '../atoms/AtomCard';
 import {AtomText} from '../atoms/AtomText';
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useImageAspectRatio} from '../../lib/hooks';
+
+const styles = StyleSheet.create({
+  productTitle: {
+    minHeight: 50,
+  },
+  containerStyle: {
+    borderColor: 'silver',
+    borderWidth: 0.2,
+  },
+});
 
 type ProductCardProps = {
   data: any[];
 };
-
-const ItemSeparatorComponent = () => <AtomView pR="xs" />;
 
 const ProductCard = ({data}: ProductCardProps) => {
   const navigation = useNavigation<any>();
@@ -26,12 +34,13 @@ const ProductCard = ({data}: ProductCardProps) => {
         navigation.navigate('ProductDetail', {productId: item.id});
 
       const renderBelowCard = () => (
-        <AtomView width={WINDOW_WIDTH / 2.6} pV="small">
+        <AtomView width={WINDOW_WIDTH / 2} pAll="small">
           <AtomText
+            style={styles.productTitle}
             text={item.title}
+            pV="xs"
             textAlign="center"
             textTransform="capitalize"
-            size="small"
             numberOfLines={2}
             fontWeight="semibold"
           />
@@ -39,26 +48,26 @@ const ProductCard = ({data}: ProductCardProps) => {
             text={item.brand}
             textAlign="center"
             size="small"
-            pT="xxs"
             numberOfLines={1}
+            pV="xs"
             fontWeight="400"
+            color="pineGreen"
           />
           <AtomText
             text={`$${item.price}`}
             textAlign="center"
-            size="small"
-            pT="xxs"
-            color="red"
-            fontWeight="400"
+            color="pineGreen"
+            fontWeight="bold"
           />
         </AtomView>
       );
 
       return (
         <AtomCard
+          containerStyle={styles.containerStyle}
           onPressCard={onPressCard}
           image={item.thumbnail}
-          imgStyle={{width: WINDOW_WIDTH / 2.6, aspectRatio}}
+          imgStyle={{width: WINDOW_WIDTH / 2, aspectRatio}}
           renderBelowCard={renderBelowCard()}
         />
       );
@@ -72,7 +81,6 @@ const ProductCard = ({data}: ProductCardProps) => {
       horizontal={true}
       data={data}
       renderItem={renderProduct}
-      ItemSeparatorComponent={ItemSeparatorComponent}
       keyExtractor={(product, index) => `${product.id}-${index}`}
     />
   );

@@ -9,19 +9,18 @@ const ListHeader = ({title, icon}: {title: string; icon?: TIcons}) => (
   <AtomView
     flexDirection="row"
     justifyContent="space-between"
+    flex={1}
     alignItems="center">
     <AtomText
       text={title}
       textTransform={'uppercase'}
       color="coffeeBrown"
       fontWeight={'400'}
-      size="medium"
+      size="large"
     />
-    <AtomIcon
-      icon={icon ?? 'arrowRight'}
-      tintColor={Colors.coffeeBrown}
-      size="xxl"
-    />
+    {icon ? (
+      <AtomIcon icon={icon} tintColor={Colors.coffeeBrown} size="xxl" />
+    ) : null}
   </AtomView>
 );
 

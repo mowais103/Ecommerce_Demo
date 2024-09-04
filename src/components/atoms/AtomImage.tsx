@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {AtomView} from './AtomView';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import {Images} from '../../assets';
 
 const styles = StyleSheet.create({
   loadingImgStyle: {
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
 });
 
 type AtomImageProps = {
-  src: string;
+  src: string | keyof typeof Images;
   wrapStyle?: StyleProp<ViewStyle>;
   imgStyle: ImageStyle;
 };
@@ -50,7 +51,7 @@ const AtomImage = ({wrapStyle, src, imgStyle}: AtomImageProps) => {
       {loading ? renderLoadingPlaceholder() : null}
       {src ? (
         <Image
-          source={{uri: src}}
+          source={typeof src === 'string' ? {uri: src} : src}
           style={[imgStyle, loading ? styles.loadingImgStyle : null]}
           resizeMode="cover"
           onLoadStart={() => setLoading(true)}

@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react';
 import {AtomImage} from '../../components/atoms/AtomImage';
 import {AtomView} from '../../components/atoms/AtomView';
 import {ImageStyle, StyleProp, ViewStyle} from 'react-native';
+import {TColor} from '../../types/common';
 
 type AtomCardProps = {
   image: string;
@@ -9,6 +10,7 @@ type AtomCardProps = {
   renderBelowCard?: ReactNode;
   onPressCard?: () => void;
   containerStyle?: StyleProp<ViewStyle>;
+  backgroundColor?: TColor;
 };
 
 const AtomCard = ({
@@ -16,10 +18,14 @@ const AtomCard = ({
   imgStyle,
   renderBelowCard,
   containerStyle,
+  backgroundColor,
   onPressCard,
 }: AtomCardProps) => {
   return (
-    <AtomView onPress={onPressCard} style={containerStyle}>
+    <AtomView
+      onPress={onPressCard}
+      style={containerStyle}
+      backgroundColor={backgroundColor}>
       <AtomImage src={image} imgStyle={imgStyle} />
       {renderBelowCard ? renderBelowCard : null}
     </AtomView>
