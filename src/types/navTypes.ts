@@ -20,7 +20,7 @@ type HomeStackParamList = {
 };
 
 type CollectionsStackParamList = {
-  HomeScreen: undefined;
+  CollectionScreen: undefined;
 };
 
 type CartStackParamList = {
@@ -39,9 +39,13 @@ type BottomTabNavigation = NavigationProp<BottomTabParamList>;
 type BottomTabScreenProps<T extends keyof BottomTabParamList> =
   NativeStackScreenProps<BottomTabParamList, T>;
 
-type HomeStackNavigation = NavigationProp<RootStackParamList>;
+type HomeStackNavigation = NavigationProp<HomeStackParamList>;
 type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   NativeStackScreenProps<HomeStackParamList, T>;
+
+type CollectionStackNavigation = NavigationProp<CollectionsStackParamList>;
+type CollectionStackScreenProps<T extends keyof CollectionsStackParamList> =
+  NativeStackScreenProps<CollectionsStackParamList, T>;
 
 export type {
   RootStackParamList,
@@ -56,4 +60,6 @@ export type {
   BottomTabScreenProps,
   HomeStackNavigation,
   HomeStackScreenProps,
+  CollectionStackNavigation,
+  CollectionStackScreenProps,
 };

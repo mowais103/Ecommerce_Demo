@@ -1,21 +1,21 @@
 import React from 'react';
 import {COMMON_HEADER_OPTIONS} from '../styles/constants';
-import {HomeScreen} from '../screens/HomeScreen/HomeScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CollectionsTabParamList} from '../types/navTypes';
+import {CollectionScreen} from '../screens/CollectionScreen/CollectionScreen';
+import {CollectionsStackParamList} from '../types/navTypes';
 
-const Stack = createNativeStackNavigator<CollectionsTabParamList>();
+const Stack = createNativeStackNavigator<CollectionsStackParamList>();
 
 const Collections = () => {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="CollectionScreen"
       screenOptions={{
         ...COMMON_HEADER_OPTIONS,
       }}>
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="CollectionScreen"
+        component={CollectionScreen}
         options={{headerTitle: 'SHOP BUDDY'}}
       />
     </Stack.Navigator>

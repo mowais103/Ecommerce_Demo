@@ -39,7 +39,7 @@ const HomeScreen = () => {
   const fetchCollections = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getData(Endpoints.getProductsCategories);
+      const res = await getData(`${Endpoints.getProductsCategories}?limit=4`);
       if (res) {
         setCategories(res);
         setLoading(false);
@@ -96,13 +96,16 @@ const HomeScreen = () => {
           <ListHeader title={'Shop New Arrivals'} icon="arrowRight" />
           <Spacer vertical="small" />
           <ProductCard data={newArrivals} />
+
           <Spacer vertical="medium" />
           <ListHeader title={'Browse Hot Categories'} />
           <Spacer vertical="medium" />
+
           <CollectionScroll collections={categories} />
           <Spacer vertical="medium" />
           <AppBanner image={Images.banner} />
         </AtomView>
+
         <Video
           source={{
             uri: video_url,

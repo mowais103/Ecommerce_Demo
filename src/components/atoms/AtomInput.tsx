@@ -1,7 +1,14 @@
-import React, {LegacyRef, ReactNode, useMemo} from 'react';
-import {StyleSheet, TextInput, TextInputProps} from 'react-native';
+import React, {Fragment, LegacyRef, ReactNode, useMemo} from 'react';
+import {
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  ViewStyle,
+} from 'react-native';
 import {AtomView} from './AtomView';
 import {AtomText} from './AtomText';
+import {TColor} from '../../types/common';
 
 type AtomInputProps = TextInputProps & {
   value?: string | undefined;
@@ -11,6 +18,8 @@ type AtomInputProps = TextInputProps & {
   errorMessage?: string;
   disabled?: boolean | null;
   ref?: LegacyRef<TextInput>;
+  viewStyle?: StyleProp<ViewStyle>;
+  backgroundColor?: TColor;
 };
 
 const styles = StyleSheet.create({
@@ -27,6 +36,8 @@ const AtomInput = ({
   disabled,
   errorMessage,
   style,
+  viewStyle,
+  backgroundColor,
   ref,
   ...rest
 }: AtomInputProps) => {
@@ -64,8 +75,10 @@ const AtomInput = ({
   );
 
   return (
-    <>
+    <Fragment>
       <AtomView
+        backgroundColor={backgroundColor}
+        style={viewStyle}
         flexDirection="row"
         pH="medium"
         borderColor="silver"
@@ -75,7 +88,7 @@ const AtomInput = ({
         {renderRightElement()}
       </AtomView>
       {renderError()}
-    </>
+    </Fragment>
   );
 };
 
