@@ -36,7 +36,10 @@ const CarouselSlider = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<Animated.FlatList<any>>(null);
 
-  const isLooping = () => loop && horizontal && data.length > 1;
+  const isLooping = useCallback(
+    () => loop && horizontal && data.length > 1,
+    [data.length, horizontal, loop],
+  );
   const dotAnimValue = useRef(
     new Animated.Value(isLooping() ? WINDOW_WIDTH : 0),
   ).current;
@@ -53,25 +56,31 @@ const CarouselSlider = ({
     return false;
   };
 
-  const onScrollListener = (event: NativeSyntheticEvent<any>): void => {
-    dotAnimValue.setValue(event.nativeEvent.contentOffset.x);
-    setScrollX(event.nativeEvent.contentOffset.x);
-  };
+  const onScrollListener = useCallback(
+    (event: NativeSyntheticEvent<any>): void => {
+      dotAnimValue.setValue(event.nativeEvent.contentOffset.x);
+      setScrollX(event.nativeEvent.contentOffset.x);
+    },
+    [dotAnimValue],
+  );
 
   const onViewableItemsChanged = useRef(({viewableItems}: any) => {
     setActiveIndex(viewableItems[0].index);
   }).current;
 
-  const scrollToOffset = (offset: number, animated = false) => {
+  const scrollToOffset = useCallback((offset: number, animated = false) => {
     flatListRef.current?.scrollToOffset({
       offset,
       animated,
     });
-  };
-
-  const scrollToIndex = useCallback((index: number, animated = false) => {
-    scrollToOffset(WINDOW_WIDTH * index, animated);
   }, []);
+
+  const scrollToIndex = useCallback(
+    (index: number, animated = false) => {
+      scrollToOffset(WINDOW_WIDTH * index, animated);
+    },
+    [scrollToOffset],
+  );
 
   const scrollTo = useCallback(
     (index: number) => {
@@ -90,7 +99,7 @@ const CarouselSlider = ({
     };
   };
 
-  const renderDots = () => {
+  const renderDots = useCallback(() => {
     if (!showDots) {
       return null;
     }
@@ -106,7 +115,7 @@ const CarouselSlider = ({
     }
 
     return null;
-  };
+  }, [data.length, isLooping, activeIndex, scrollTo, showDots]);
 
   return (
     <AtomView

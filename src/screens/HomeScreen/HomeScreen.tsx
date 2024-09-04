@@ -13,6 +13,9 @@ import {CollectionScroll} from '../../components/molecules/CollectionScroll';
 import {video_url} from './constants';
 import {FlatList} from 'react-native';
 import {Spacer} from '../../components/atoms/AtomSpacer';
+import {useImageAspectRatio} from '../../lib/hooks';
+import {AppBanner} from '../../components/molecules/AppBanner';
+import {Images} from '../../assets';
 
 const HomeScreen = () => {
   const [newArrivals, setNewArrivals] = useState<any>([]);
@@ -54,17 +57,21 @@ const HomeScreen = () => {
     fetchCollections();
   }, [fetchNewArrivals, fetchCollections]);
 
+  const aspectRatio = useImageAspectRatio(
+    newArrivals[0]?.thumbnail ? newArrivals[0]?.thumbnail : '',
+  );
+
   const renderCarouselItem = useCallback(
     ({item}: any) => (
       <AtomImage
-        src={item.images[0]}
+        src={item?.images[0]}
         imgStyle={{
           width: WINDOW_WIDTH,
-          aspectRatio: 0.8,
+          aspectRatio,
         }}
       />
     ),
-    [],
+    [aspectRatio],
   );
 
   const renderCarousel = useCallback(
@@ -86,11 +93,15 @@ const HomeScreen = () => {
       <Fragment>
         <Divider />
         <AtomView pV="large" pH="medium">
-          <CollectionScroll collections={categories} />
-          <Spacer vertical="medium" />
           <ListHeader title={'Shop New Arrivals'} icon="arrowRight" />
           <Spacer vertical="small" />
           <ProductCard data={newArrivals} />
+          <Spacer vertical="medium" />
+          <ListHeader title={'Browse Hot Categories'} />
+          <Spacer vertical="medium" />
+          <CollectionScroll collections={categories} />
+          <Spacer vertical="medium" />
+          <AppBanner image={Images.banner} />
         </AtomView>
         <Video
           source={{

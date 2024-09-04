@@ -17,10 +17,6 @@ const styles = StyleSheet.create({
     borderWidth: 0.2,
     width: WINDOW_WIDTH / 2,
   },
-  imgStyle: {
-    width: WINDOW_WIDTH / 2,
-    marginTop: 16,
-  },
 });
 
 type ProductListingProps = {
@@ -47,7 +43,7 @@ const ProductListing = ({route, navigation}: ProductListingProps) => {
       const res = await getData(endPointToUse);
       if (res?.products) {
         setProduct(res.products);
-        // setLoading(false);
+        setLoading(false);
       }
     } catch (e) {
       setLoading(false);
