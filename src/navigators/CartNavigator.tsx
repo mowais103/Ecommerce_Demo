@@ -1,21 +1,21 @@
 import React from 'react';
 import {COMMON_HEADER_OPTIONS} from '../styles/constants';
-import {HomeScreen} from '../screens/HomeScreen/HomeScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CartTabParamList} from '../types/navTypes';
+import {CartStackParamList} from '../types/navTypes';
+import {CartScreen} from '../screens/CartScreen/CartScreen';
 
-const Stack = createNativeStackNavigator<CartTabParamList>();
+const Stack = createNativeStackNavigator<CartStackParamList>();
 
 const Cart = () => {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="CartScreen"
       screenOptions={{
         ...COMMON_HEADER_OPTIONS,
       }}>
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="CartScreen"
+        component={CartScreen}
         options={{headerTitle: 'SHOP BUDDY'}}
       />
     </Stack.Navigator>

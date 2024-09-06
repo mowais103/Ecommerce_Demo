@@ -13,6 +13,9 @@ const Icons = {
   triangleUp: require('./icons/triangleUp.png'),
   search: require('./icons/search.png'),
   close: require('./icons/close.png'),
+  plus: require('./icons/plus.png'),
+  trash: require('./icons/trash.png'),
+  minus: require('./icons/minus.png'),
 };
 
 export {Icons};
