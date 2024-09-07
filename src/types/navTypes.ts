@@ -4,8 +4,9 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 type RootStackParamList = {
   SignInScreen: undefined;
   TabNavigator: undefined;
-  ProductDetail: {productId: string};
+  ProductDetail: {product: any};
   ProductListing: {url: string};
+  CartScreen: undefined;
 };
 
 type BottomTabParamList = {

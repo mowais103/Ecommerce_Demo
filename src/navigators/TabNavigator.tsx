@@ -14,6 +14,7 @@ import {Colors} from '../styles/common';
 import {TouchableOpacity} from 'react-native';
 import {AtomText} from '../components/atoms/AtomText';
 import {AtomView} from '../components/atoms/AtomView';
+import {useAppSelector} from '../lib/hooks/common';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -52,6 +53,9 @@ const TabNavigator = () => {
   const tabBarButton = (props: BottomTabBarButtonProps) => (
     <TouchableOpacity {...props} />
   );
+
+  const totalQty = useAppSelector(state => state.cart.totalQty);
+
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -62,7 +66,13 @@ const TabNavigator = () => {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Collections" component={Collections} />
-      <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          tabBarBadge: totalQty > 0 ? totalQty : undefined,
+        }}
+      />
       <Tab.Screen name="Favorites" component={Favorites} />
     </Tab.Navigator>
   );

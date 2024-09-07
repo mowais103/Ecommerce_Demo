@@ -25,9 +25,9 @@ const HomeScreen = () => {
   const fetchNewArrivals = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getData(`${Endpoints.getProducts}?limit=10`);
-      if (res?.products) {
-        setNewArrivals(res?.products);
+      const res: any = await getData(`${Endpoints.getProducts}?limit=10`);
+      if (res.products) {
+        setNewArrivals(res.products);
         setLoading(false);
       }
     } catch (e) {

@@ -17,23 +17,19 @@ const styles = StyleSheet.create({
 
 type QuantifierProps = {
   itemQty: number;
-  OnRemoveCartItem: () => void;
-  onAddCartItem: () => void;
+  OnDecrement: () => void;
+  onIncrement: () => void;
 };
 
-const Quantifier = ({
-  itemQty,
-  OnRemoveCartItem,
-  onAddCartItem,
-}: QuantifierProps) => (
+const Quantifier = ({itemQty, OnDecrement, onIncrement}: QuantifierProps) => (
   <AtomView flexDirection="row">
     <AtomView
       style={styles.deleteItemContainer}
       justifyContent="center"
       alignItems="center"
       borderColor="lightGrey"
-      pAll="medium"
-      onPress={OnRemoveCartItem}>
+      pAll="small"
+      onPress={OnDecrement}>
       {itemQty <= 1 ? (
         <AtomIcon icon="trash" size="small" />
       ) : (
@@ -45,15 +41,15 @@ const Quantifier = ({
       borderColor="lightGrey"
       alignItems="center"
       pH="large">
-      <AtomText text={itemQty} size={'small'} />
+      <AtomText text={itemQty} />
     </AtomView>
     <AtomView
       style={styles.addItemContainer}
       justifyContent="center"
       borderColor="lightGrey"
       alignItems="center"
-      pAll="medium"
-      onPress={onAddCartItem}>
+      pAll="small"
+      onPress={onIncrement}>
       <AtomIcon icon="plus" size="small" />
     </AtomView>
   </AtomView>
