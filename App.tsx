@@ -12,13 +12,20 @@ import {
 } from 'react-native-safe-area-context';
 import {RootNavigator} from './src/navigators/RootNavigator';
 import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
+import {persistor, store} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const App = () => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
     </SafeAreaProvider>
   );
 };
