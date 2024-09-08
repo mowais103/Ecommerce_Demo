@@ -3,7 +3,7 @@ export type Product = {
   title: string;
   description: string;
   category: string;
-  price: string;
+  price: number;
   tags: string[];
   brand: string;
   discountPercentage: number;
@@ -11,6 +11,7 @@ export type Product = {
   product_type: string;
   thumbnail: string;
   availabilityStatus: string;
+  qty: number;
 };
 
 export type ProductImage = {

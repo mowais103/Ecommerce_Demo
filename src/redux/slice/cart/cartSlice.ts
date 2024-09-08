@@ -1,15 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../../store';
 import {CartItem} from '../../../types/reducerTypes';
+import {Product} from '../../../types/apiDataTypes';
 
 const initialState: CartItem = {
   items: [],
   totalQty: 0,
+  totalPrice: 0,
 };
 
-const calculateTotalQty = (items: String[]) => {
-  return items.reduce((acc, item) => acc + item.qty, 0);
-};
+const calculateTotalQty = (items: Product[]) =>
+  items.reduce((acc, item) => acc + item.qty, 0);
+
+const calculateTotalPrice = (items: Product[]) =>
+  items.reduce((acc, item) => acc + item.price * item.qty, 0.0);
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -24,6 +28,7 @@ const cartSlice = createSlice({
       }
 
       state.totalQty = calculateTotalQty(state.items);
+      state.totalPrice = calculateTotalPrice(state.items);
     },
 
     itemRemoved: (state, {payload}) => {
@@ -36,6 +41,7 @@ const cartSlice = createSlice({
       }
 
       state.totalQty = calculateTotalQty(state.items);
+      state.totalPrice = calculateTotalPrice(state.items);
     },
   },
 });
