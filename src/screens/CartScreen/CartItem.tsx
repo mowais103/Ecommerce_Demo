@@ -5,7 +5,11 @@ import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles/common';
 import {AtomView} from '../../components/atoms/AtomView';
 import {AtomCard} from '../../components/atoms/AtomCard';
 import {Divider} from '../../components/atoms/AtomDivider';
-import {itemAdded, selectAllItems} from '../../redux/slice/cart/cartSlice';
+import {
+  itemAdded,
+  itemRemoved,
+  selectAllItems,
+} from '../../redux/slice/cart/cartSlice';
 import {useAppDispatch, useAppSelector} from '../../lib/hooks/common';
 import {Quantifier} from '../../components/molecules/Quantifier';
 
@@ -27,6 +31,10 @@ const CartItem = () => {
     ({item}: any) => {
       const onIncrementItemQty = () => {
         dispatch(itemAdded(item));
+      };
+
+      const OnDecrementItemQty = () => {
+        dispatch(itemRemoved(item));
       };
 
       return (
@@ -62,7 +70,7 @@ const CartItem = () => {
             <Quantifier
               itemQty={item.qty}
               onIncrement={onIncrementItemQty}
-              // OnDecrement={item => OnRemoveCartItem(item.qty)}
+              OnDecrement={OnDecrementItemQty}
             />
           </AtomView>
         </AtomView>
