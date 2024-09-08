@@ -1,10 +1,9 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
 import {AtomView} from '../../components/atoms/AtomView';
 import {WINDOW_WIDTH} from '../../styles/common';
 import {AtomImage} from '../../components/atoms/AtomImage';
 import {CarouselSlider} from '../../components/molecules/CarouselSlider/CarouselSlider';
-import {Endpoints, getData} from '../../async';
 import {RootStackScreenProps} from '../../types/navTypes';
 import {Divider} from '../../components/atoms/AtomDivider';
 import {AtomText} from '../../components/atoms/AtomText';
@@ -12,35 +11,19 @@ import {AtomButton} from '../../components/atoms/AtomButton';
 import {Pill} from '../../components/molecules/Pill';
 import {Description} from './Description';
 import {calculateOriginalPrice} from '../../lib/utils';
+import {itemAdded} from '../../redux/slice/cart/cartSlice';
+import {useAppDispatch} from '../../lib/hooks/common';
 
 type ProductDetailProps = {
   route: RootStackScreenProps<'ProductDetail'>['route'];
+  navigation: RootStackScreenProps<'ProductDetail'>['navigation'];
 };
 
-const ProductDetail = ({route}: ProductDetailProps) => {
-  const [product, setProduct] = useState<any>({});
+const ProductDetail = ({route, navigation}: ProductDetailProps) => {
   const [showProductDetails, setShowProductDetails] = useState<boolean>(false);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const {productId} = route.params;
-
-  const fetchProductById = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await getData(`${Endpoints.getProducts}/${productId}`);
-      if (res) {
-        setProduct(res);
-        setLoading(false);
-      }
-    } catch (e) {
-      console.warn(e);
-      setLoading(false);
-    }
-  }, [productId]);
-
-  useEffect(() => {
-    fetchProductById();
-  }, [fetchProductById]);
+  const {product} = route.params;
 
   const renderCarouselItem = useCallback(({item}: any) => {
     return (
@@ -61,9 +44,7 @@ const ProductDetail = ({route}: ProductDetailProps) => {
 
   // push brand names at start of tags array
   const newTagArray = useMemo(() => {
-    const tags = product?.tags ?? [];
-    const brand = product?.brand ? [product.brand] : [];
-    return [...brand, ...tags];
+    return [product?.brand, ...product?.tags];
   }, [product?.brand, product?.tags]);
 
   const renderPills = useCallback(
@@ -77,7 +58,20 @@ const ProductDetail = ({route}: ProductDetailProps) => {
     [newTagArray],
   );
 
-  const addToCart = () => console.log('jjjjj');
+  const addToCart = useCallback(() => {
+    if (product.id) {
+      const itemToAdd = {
+        id: product.id,
+        title: product.title,
+        image: product.thumbnail,
+        brand: product.brand,
+        price: product.price,
+        qty: 1,
+      };
+      dispatch(itemAdded(itemToAdd));
+      navigation.navigate('CartScreen');
+    }
+  }, [product, dispatch, navigation]);
 
   const renderProductDetails = useCallback(
     () => (
@@ -103,8 +97,8 @@ const ProductDetail = ({route}: ProductDetailProps) => {
     [originalPrice, product.price, product.title, renderPills],
   );
 
-  if (loading) {
-    return;
+  if (!product) {
+    return null;
   }
 
   return (

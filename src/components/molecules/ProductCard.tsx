@@ -31,7 +31,7 @@ const ProductCard = ({data}: ProductCardProps) => {
   const renderProduct = useCallback(
     ({item}: any) => {
       const onPressCard = () =>
-        navigation.navigate('ProductDetail', {productId: item.id});
+        navigation.navigate('ProductDetail', {product: item});
 
       const renderBelowCard = () => (
         <AtomView width={WINDOW_WIDTH / 2} pAll="small">
