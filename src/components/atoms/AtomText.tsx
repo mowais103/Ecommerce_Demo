@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlexStyle, Text, TextProps, TextStyle} from 'react-native';
-import {TColor, TFontSize, TSpacing} from '../../types/common';
+import {TColor, TFontSize, TSpacing} from '../../types/styleTypes';
 import {Colors, FontSizes, STDSpacing} from '../../styles/common';
 
 export type AtomTextProps = TextProps & {

@@ -13,6 +13,14 @@ import {Description} from './Description';
 import {calculateOriginalPrice} from '../../lib/utils';
 import {itemAdded} from '../../redux/slice/cart/cartSlice';
 import {useAppDispatch} from '../../lib/hooks/common';
+import {ListRenderItem, ListRenderItemInfo, StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  imgStyle: {
+    width: WINDOW_WIDTH,
+    aspectRatio: 0.8,
+  },
+});
 
 type ProductDetailProps = {
   route: RootStackScreenProps<'ProductDetail'>['route'];
@@ -25,17 +33,15 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
 
   const {product} = route.params;
 
-  const renderCarouselItem = useCallback(({item}: any) => {
-    return (
+  const renderCarouselItem: ListRenderItem<string> = useCallback(
+    ({item}: ListRenderItemInfo<string>) => (
       <AtomView>
-        <AtomImage
-          src={item}
-          imgStyle={{width: WINDOW_WIDTH, aspectRatio: 0.8}}
-        />
+        <AtomImage src={item} imgStyle={styles.imgStyle} />
         <Divider />
       </AtomView>
-    );
-  }, []);
+    ),
+    [],
+  );
 
   const originalPrice = calculateOriginalPrice(
     product.price,

@@ -11,23 +11,24 @@ import {Endpoints, getData} from '../../async';
 import {Divider} from '../../components/atoms/AtomDivider';
 import {CollectionScroll} from '../../components/molecules/CollectionScroll';
 import {video_url} from './constants';
-import {FlatList} from 'react-native';
+import {FlatList, ListRenderItem, ListRenderItemInfo} from 'react-native';
 import {Spacer} from '../../components/atoms/AtomSpacer';
 import {useImageAspectRatio} from '../../lib/hooks';
 import {AppBanner} from '../../components/molecules/AppBanner';
 import {Images} from '../../assets';
+import {Product} from '../../types/apiDataTypes';
 
 const HomeScreen = () => {
-  const [newArrivals, setNewArrivals] = useState<any>([]);
-  const [categories, setCategories] = useState<any>([]);
+  const [newArrivals, setNewArrivals] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<any>({});
   const [loading, setLoading] = useState(false);
 
   const fetchNewArrivals = useCallback(async () => {
     setLoading(true);
     try {
       const res: any = await getData(`${Endpoints.getProducts}?limit=10`);
-      if (res.products) {
-        setNewArrivals(res.products);
+      if (res.data) {
+        setNewArrivals(res.data.products);
         setLoading(false);
       }
     } catch (e) {
@@ -39,9 +40,9 @@ const HomeScreen = () => {
   const fetchCollections = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getData(`${Endpoints.getProductsCategories}?limit=4`);
-      if (res) {
-        setCategories(res);
+      const res = await getData(`${Endpoints.getProductsCategories}?limit=10`);
+      if (res.data) {
+        setCategories(res.data);
         setLoading(false);
         return;
       }
@@ -61,10 +62,10 @@ const HomeScreen = () => {
     newArrivals[0]?.thumbnail ? newArrivals[0]?.thumbnail : '',
   );
 
-  const renderCarouselItem = useCallback(
-    ({item}: any) => (
+  const renderCarouselItem: ListRenderItem<Product> = useCallback(
+    ({item}: ListRenderItemInfo<Product>) => (
       <AtomImage
-        src={item?.images[0]}
+        src={item.images[0]}
         imgStyle={{
           width: WINDOW_WIDTH,
           aspectRatio,
@@ -79,7 +80,7 @@ const HomeScreen = () => {
       <CarouselSlider
         loop={true}
         horizontal={true}
-        data={newArrivals ?? []}
+        data={newArrivals}
         renderItem={renderCarouselItem}
         showDots={true}
         keyExtractor={(item, index) => `${item.id}-${index}`}

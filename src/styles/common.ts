@@ -4,7 +4,7 @@ import {
   Platform,
   ScrollViewProps,
 } from 'react-native';
-import {TFontSize, TIconSize, TSpacing} from '../types/common';
+import {TFontSize, TIconSize, TSpacing} from '../types/styleTypes';
 
 const IS_IOS = Platform.OS === 'ios';
 

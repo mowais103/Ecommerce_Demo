@@ -1,7 +1,12 @@
 import React, {useCallback, useMemo} from 'react';
 import {AtomView} from '../atoms/AtomView';
 import {AtomText} from '../atoms/AtomText';
-import {FlatList, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  StyleSheet,
+} from 'react-native';
 import {
   DEFAULT_SCROLL_VIEW_PROPS,
   WINDOW_HEIGHT,
@@ -9,9 +14,11 @@ import {
 } from '../../styles/common';
 import {useNavigation} from '@react-navigation/native';
 import {roundOff} from '../../lib/utils';
+import {Category} from '../../types/apiDataTypes';
+import {RootNavigation} from '../../types/navTypes';
 
 type CollectionScrollProps = {
-  collections: any[];
+  collections: Category[];
 };
 
 const styles = StyleSheet.create({
@@ -24,7 +31,7 @@ const styles = StyleSheet.create({
 const ItemSeparatorComponent = () => <AtomView pR="xs" />;
 
 const CollectionScroll = ({collections}: CollectionScrollProps) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<RootNavigation>();
 
   // responsive circle style
   const getCircleStyle = useMemo(() => {
@@ -35,8 +42,8 @@ const CollectionScroll = ({collections}: CollectionScrollProps) => {
     return {width, height, borderRadius};
   }, []);
 
-  const renderCollection = useCallback(
-    ({item}: any) => {
+  const renderCollection: ListRenderItem<Category> = useCallback(
+    ({item}: ListRenderItemInfo<Category>) => {
       const onPressCategory = () =>
         navigation.navigate('ProductListing', {url: item?.url});
 

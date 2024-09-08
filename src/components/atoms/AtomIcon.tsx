@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import {TIcons, TIconSize, TSpacing} from '../../types/common';
+import {TIcons, TIconSize, TSpacing} from '../../types/styleTypes';
 import {getIconDims} from '../../lib/utils';
 import {Icons} from '../../assets/icons';
 import {STDSpacing} from '../../styles/common';

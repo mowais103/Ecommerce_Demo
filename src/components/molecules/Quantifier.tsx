@@ -3,15 +3,31 @@ import {AtomView} from '../atoms/AtomView';
 import {AtomIcon} from '../atoms/AtomIcon';
 import {AtomText} from '../atoms/AtomText';
 import {StyleSheet} from 'react-native';
+import {Colors} from '../../styles/common';
 
 const styles = StyleSheet.create({
   deleteItemContainer: {
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
+    borderColor: Colors.grey,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   addItemContainer: {
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
+    borderColor: Colors.grey,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemQtyContainer: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: Colors.grey,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -25,9 +41,6 @@ const Quantifier = ({itemQty, OnDecrement, onIncrement}: QuantifierProps) => (
   <AtomView flexDirection="row">
     <AtomView
       style={styles.deleteItemContainer}
-      justifyContent="center"
-      alignItems="center"
-      borderColor="lightGrey"
       pAll="small"
       onPress={OnDecrement}>
       {itemQty <= 1 ? (
@@ -36,18 +49,11 @@ const Quantifier = ({itemQty, OnDecrement, onIncrement}: QuantifierProps) => (
         <AtomIcon icon="minus" size="small" />
       )}
     </AtomView>
-    <AtomView
-      justifyContent="center"
-      borderColor="lightGrey"
-      alignItems="center"
-      pH="large">
+    <AtomView pH="large" style={styles.itemQtyContainer}>
       <AtomText text={itemQty} />
     </AtomView>
     <AtomView
       style={styles.addItemContainer}
-      justifyContent="center"
-      borderColor="lightGrey"
-      alignItems="center"
       pAll="small"
       onPress={onIncrement}>
       <AtomIcon icon="plus" size="small" />

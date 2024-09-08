@@ -1,5 +1,5 @@
 import React from 'react';
-import {TIcons} from '../../types/common';
+import {TIcons} from '../../types/styleTypes';
 import {AtomView} from '../atoms/AtomView';
 import {AtomText} from '../atoms/AtomText';
 import {AtomIcon} from '../atoms/AtomIcon';
@@ -16,7 +16,6 @@ const ListHeader = ({title, icon}: {title: string; icon?: TIcons}) => (
       textTransform={'uppercase'}
       color="coffeeBrown"
       fontWeight={'400'}
-      size="large"
     />
     {icon ? (
       <AtomIcon icon={icon} tintColor={Colors.coffeeBrown} size="xxl" />

@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {BottomTabParamList} from '../types/navTypes';
 import {AtomIcon} from '../components/atoms/AtomIcon';
-import {TIcons} from '../types/common';
+import {TIcons} from '../types/styleTypes';
 import {Home} from './HomeNavigator';
 import {Collections} from './CollectionNavigator';
 import {Cart} from './CartNavigator';

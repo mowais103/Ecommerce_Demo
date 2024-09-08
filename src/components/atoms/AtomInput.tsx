@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {AtomView} from './AtomView';
 import {AtomText} from './AtomText';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 
 type AtomInputProps = TextInputProps & {
   value?: string | undefined;

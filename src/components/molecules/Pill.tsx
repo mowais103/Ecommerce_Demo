@@ -1,5 +1,5 @@
 import React from 'react';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 import {AtomText} from '../atoms/AtomText';
 import {AtomView} from '../atoms/AtomView';
 

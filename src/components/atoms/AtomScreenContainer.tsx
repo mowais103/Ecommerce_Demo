@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {AtomSafeArea} from './AtomSafeArea';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 
 type AtomScreenContainerProps = {
   children?: ReactNode;

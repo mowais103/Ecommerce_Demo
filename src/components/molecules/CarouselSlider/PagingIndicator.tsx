@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable} from 'react-native';
 import {AtomView} from '../../atoms/AtomView';
-import {TColor} from '../../../types/common';
+import {TColor} from '../../../types/styleTypes';
 
 type PagingIndicatorProps = {
   count: number;

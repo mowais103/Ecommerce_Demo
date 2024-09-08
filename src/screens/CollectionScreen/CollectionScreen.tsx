@@ -6,20 +6,21 @@ import {CollectionStackScreenProps} from '../../types/navTypes';
 import {Spacer} from '../../components/atoms/AtomSpacer';
 import {CollectionCard} from '../../components/molecules/CollectionCard';
 import {Endpoints, getData} from '../../async';
+import {CategoryObject} from '../../types/apiDataTypes';
 
 type CollectionScreenProps = CollectionStackScreenProps<'CollectionScreen'>;
 
 const CollectionScreen = ({}: CollectionScreenProps) => {
   const [value, setValue] = useState<string>('');
-  const [categories, setCategories] = useState<any>([]);
+  const [categories, setCategories] = useState<CategoryObject | any>({});
   const [loading, setLoading] = useState(false);
 
   const fetchCollections = useCallback(async () => {
     setLoading(true);
     try {
       const res = await getData(Endpoints.getProductsCategories);
-      if (res) {
-        setCategories(res);
+      if (res.data) {
+        setCategories(res.data);
         setLoading(false);
         return;
       }

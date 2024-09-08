@@ -3,9 +3,16 @@ import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles/common';
 import {AtomView} from '../atoms/AtomView';
 import {AtomCard} from '../atoms/AtomCard';
 import {AtomText} from '../atoms/AtomText';
-import {FlatList, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  StyleSheet,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useImageAspectRatio} from '../../lib/hooks';
+import {Product} from '../../types/apiDataTypes';
+import {RootNavigation} from '../../types/navTypes';
 
 const styles = StyleSheet.create({
   productTitle: {
@@ -18,18 +25,18 @@ const styles = StyleSheet.create({
 });
 
 type ProductCardProps = {
-  data: any[];
+  data: Product[];
 };
 
 const ProductCard = ({data}: ProductCardProps) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<RootNavigation>();
 
   const aspectRatio = useImageAspectRatio(
     data[0]?.thumbnail ? data[0]?.thumbnail : '',
   );
 
-  const renderProduct = useCallback(
-    ({item}: any) => {
+  const renderProduct: ListRenderItem<Product> = useCallback(
+    ({item}: ListRenderItemInfo<Product>) => {
       const onPressCard = () =>
         navigation.navigate('ProductDetail', {product: item});
 
