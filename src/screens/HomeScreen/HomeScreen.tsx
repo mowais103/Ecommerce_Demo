@@ -20,7 +20,7 @@ import {Product} from '../../types/apiDataTypes';
 
 const HomeScreen = () => {
   const [newArrivals, setNewArrivals] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<any>({});
+  const [categories, setCategories] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchNewArrivals = useCallback(async () => {
@@ -40,7 +40,7 @@ const HomeScreen = () => {
   const fetchCollections = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getData(`${Endpoints.getProductsCategories}?limit=10`);
+      const res = await getData(Endpoints.getProductsCategories);
       if (res.data) {
         setCategories(res.data);
         setLoading(false);
