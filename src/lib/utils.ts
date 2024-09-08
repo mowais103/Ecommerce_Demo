@@ -1,5 +1,5 @@
 import {memoize} from 'underscore';
-import {TIconSize} from '../types/common';
+import {TIconSize} from '../types/styleTypes';
 import {IconSizes} from '../styles/common';
 
 const getSquareDims = memoize((n: number) => ({width: n, height: n}));
@@ -10,7 +10,7 @@ const getIconDims = (size: TIconSize) => {
 
 const calculateOriginalPrice = (
   discountedPrice: string,
-  discountPercentage: string,
+  discountPercentage: number,
 ) => {
   const originalPrice =
     (Number(discountedPrice) * 100) / (100 - Number(discountPercentage));
