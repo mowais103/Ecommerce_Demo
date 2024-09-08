@@ -2,7 +2,7 @@ import React, {ReactNode, useMemo} from 'react';
 import {View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Colors} from '../../styles/common';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 
 type AtomSafeAreaProps = {
   backgroundColor?: TColor;

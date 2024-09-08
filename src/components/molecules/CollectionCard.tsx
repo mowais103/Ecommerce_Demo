@@ -1,21 +1,23 @@
 import React, {useCallback} from 'react';
 import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles/common';
 import {AtomView} from '../atoms/AtomView';
-import {FlatList} from 'react-native';
+import {FlatList, ListRenderItem, ListRenderItemInfo} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {AtomText} from '../atoms/AtomText';
+import {Category} from '../../types/apiDataTypes';
+import {RootNavigation} from '../../types/navTypes';
 
 type CollectionCardProps = {
-  collection: any[];
+  collection: Category[];
 };
 
 const ItemSeparatorComponent = () => <AtomView mB="medium" />;
 
 const CollectionCard = ({collection}: CollectionCardProps) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<RootNavigation>();
 
-  const renderCollection = useCallback(
-    ({item}: any) => {
+  const renderCollection: ListRenderItem<Category> = useCallback(
+    ({item}: ListRenderItemInfo<Category>) => {
       const onPressCategory = () =>
         navigation.navigate('ProductListing', {url: item?.url});
 

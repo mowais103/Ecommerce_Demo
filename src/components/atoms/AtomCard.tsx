@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import {AtomImage} from '../../components/atoms/AtomImage';
 import {AtomView} from '../../components/atoms/AtomView';
 import {ImageStyle, StyleProp, ViewStyle} from 'react-native';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 import {Images} from '../../assets';
 
 type AtomCardProps = {

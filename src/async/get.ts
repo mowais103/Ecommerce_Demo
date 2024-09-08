@@ -6,7 +6,7 @@ const getData = async <T>(url: string, params?: any) => {
   try {
     const res: AxiosResponse<T, any> = await axios.get<T>(url, params);
 
-    return res.data;
+    return res;
   } catch (e) {
     console.error(e);
     throw Error('response is undefined');

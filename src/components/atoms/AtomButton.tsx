@@ -3,7 +3,7 @@ import {ViewProps, ActivityIndicator} from 'react-native';
 import {Colors} from '../../styles/common';
 import {AtomView} from './AtomView';
 import {AtomText, AtomTextProps} from './AtomText';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 
 type AtomButtonProps = {
   onPress: () => void;

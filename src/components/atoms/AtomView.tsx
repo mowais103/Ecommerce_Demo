@@ -9,7 +9,7 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import {TColor, TSpacing} from '../../types/common';
+import {TColor, TSpacing} from '../../types/styleTypes';
 import {
   Colors,
   DEFAULT_SCROLL_VIEW_PROPS,

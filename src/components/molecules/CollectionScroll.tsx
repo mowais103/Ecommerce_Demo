@@ -1,17 +1,20 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback} from 'react';
 import {AtomView} from '../atoms/AtomView';
 import {AtomText} from '../atoms/AtomText';
-import {FlatList, StyleSheet} from 'react-native';
 import {
-  DEFAULT_SCROLL_VIEW_PROPS,
-  WINDOW_HEIGHT,
-  WINDOW_WIDTH,
-} from '../../styles/common';
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  StyleSheet,
+} from 'react-native';
+import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles/common';
 import {useNavigation} from '@react-navigation/native';
-import {roundOff} from '../../lib/utils';
+import {Category} from '../../types/apiDataTypes';
+import {RootNavigation} from '../../types/navTypes';
+import {getCircleStyle} from '../../styles/utils';
 
 type CollectionScrollProps = {
-  collections: any[];
+  collections: Category[];
 };
 
 const styles = StyleSheet.create({
@@ -24,19 +27,10 @@ const styles = StyleSheet.create({
 const ItemSeparatorComponent = () => <AtomView pR="xs" />;
 
 const CollectionScroll = ({collections}: CollectionScrollProps) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<RootNavigation>();
 
-  // responsive circle style
-  const getCircleStyle = useMemo(() => {
-    const dim = WINDOW_WIDTH > WINDOW_HEIGHT ? WINDOW_WIDTH : WINDOW_HEIGHT;
-    const width = roundOff(dim * 0.16);
-    const height = roundOff(dim * 0.16);
-    const borderRadius = roundOff(dim / 2);
-    return {width, height, borderRadius};
-  }, []);
-
-  const renderCollection = useCallback(
-    ({item}: any) => {
+  const renderCollection: ListRenderItem<Category> = useCallback(
+    ({item}: ListRenderItemInfo<Category>) => {
       const onPressCategory = () =>
         navigation.navigate('ProductListing', {url: item?.url});
 
@@ -47,7 +41,7 @@ const CollectionScroll = ({collections}: CollectionScrollProps) => {
           justifyContent="center"
           alignItems="center"
           backgroundColor="pineGreen"
-          style={getCircleStyle}>
+          style={getCircleStyle()}>
           <AtomText
             color="white"
             fontWeight={'bold'}
@@ -59,7 +53,7 @@ const CollectionScroll = ({collections}: CollectionScrollProps) => {
         </AtomView>
       );
     },
-    [navigation, getCircleStyle],
+    [navigation],
   );
 
   return (

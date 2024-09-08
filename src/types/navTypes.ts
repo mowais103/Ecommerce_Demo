@@ -1,10 +1,11 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {Product} from './apiDataTypes';
 
 type RootStackParamList = {
   SignInScreen: undefined;
   TabNavigator: undefined;
-  ProductDetail: {product: any};
+  ProductDetail: {product: Product};
   ProductListing: {url: string};
   CartScreen: undefined;
 };

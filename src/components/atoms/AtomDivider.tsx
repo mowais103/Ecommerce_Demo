@@ -1,7 +1,7 @@
 import React from 'react';
 import {AtomView} from './AtomView';
 import {StyleSheet} from 'react-native';
-import {TColor} from '../../types/common';
+import {TColor} from '../../types/styleTypes';
 
 const Divider = ({color, height}: {color?: TColor; height?: number}) => (
   <AtomView

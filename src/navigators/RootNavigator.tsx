@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../types/navTypes';
+import {RootNavigation, RootStackParamList} from '../types/navTypes';
 import {TabNavigator} from './TabNavigator';
 import {SignInScreen} from '../screens/SignInScreen/SignInScreen';
 import {ProductDetail} from '../screens/ProductDetail/ProductDetail';
@@ -12,7 +12,7 @@ import {CartScreen} from '../screens/CartScreen/CartScreen';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootNavigation>();
 
   const isSignedIn = true; // add logic here later
   return (

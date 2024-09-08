@@ -1,6 +1,6 @@
 import React from 'react';
 import {AtomView} from './AtomView';
-import {TSpacing} from '../../types/common';
+import {TSpacing} from '../../types/styleTypes';
 
 type SpacerProps = {
   vertical?: TSpacing;
