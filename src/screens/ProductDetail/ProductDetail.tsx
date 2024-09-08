@@ -33,16 +33,6 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
 
   const {product} = route.params;
 
-  const renderCarouselItem: ListRenderItem<string> = useCallback(
-    ({item}: ListRenderItemInfo<string>) => (
-      <AtomView>
-        <AtomImage src={item} imgStyle={styles.imgStyle} />
-        <Divider />
-      </AtomView>
-    ),
-    [],
-  );
-
   const originalPrice = calculateOriginalPrice(
     product.price,
     product.discountPercentage,
@@ -64,20 +54,15 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
     [newTagArray],
   );
 
-  const addToCart = useCallback(() => {
-    if (product.id) {
-      const itemToAdd = {
-        id: product.id,
-        title: product.title,
-        image: product.thumbnail,
-        brand: product.brand,
-        price: product.price,
-        qty: 1,
-      };
-      dispatch(itemAdded(itemToAdd));
-      navigation.navigate('CartScreen');
-    }
-  }, [product, dispatch, navigation]);
+  const renderCarouselItem: ListRenderItem<string> = useCallback(
+    ({item}: ListRenderItemInfo<string>) => (
+      <AtomView>
+        <AtomImage src={item} imgStyle={styles.imgStyle} />
+        <Divider />
+      </AtomView>
+    ),
+    [],
+  );
 
   const renderProductDetails = useCallback(
     () => (
@@ -102,6 +87,25 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
     ),
     [originalPrice, product.price, product.title, renderPills],
   );
+
+  const addToCart = useCallback(() => {
+    if (product.id) {
+      const itemToAdd = {
+        id: product.id,
+        title: product.title,
+        image: product.thumbnail,
+        brand: product.brand,
+        price: product.price,
+        qty: 1,
+      };
+      dispatch(itemAdded(itemToAdd));
+      navigation.navigate('CartScreen');
+    }
+  }, [product, dispatch, navigation]);
+
+  const onPressDescription = () => {
+    setShowProductDetails(!showProductDetails);
+  };
 
   if (!product) {
     return null;
@@ -128,7 +132,7 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
         <Description
           description={product.description}
           showProductDetails={showProductDetails}
-          onPress={() => setShowProductDetails(!showProductDetails)}
+          onPress={onPressDescription}
         />
       </AtomView>
       <AtomButton text="ADD TO CART" onPress={addToCart} />

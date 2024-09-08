@@ -27,23 +27,21 @@ const Description = ({
   onPress,
   showProductDetails,
   description,
-}: DescriptionProps) => {
-  return (
-    <AtomView style={styles.container} onPress={onPress}>
-      <ListHeader
-        title="Product Details"
-        icon={showProductDetails ? 'triangleUp' : 'triangleDown'}
+}: DescriptionProps) => (
+  <AtomView style={styles.container} onPress={onPress}>
+    <ListHeader
+      title="Product Details"
+      icon={showProductDetails ? 'triangleUp' : 'triangleDown'}
+    />
+    {showProductDetails ? (
+      <AtomText
+        text={description}
+        pV="medium"
+        color="brown"
+        fontWeight={'400'}
       />
-      {showProductDetails ? (
-        <AtomText
-          text={description}
-          pV="medium"
-          color="brown"
-          fontWeight={'400'}
-        />
-      ) : null}
-    </AtomView>
-  );
-};
+    ) : null}
+  </AtomView>
+);
 
 export {Description};
