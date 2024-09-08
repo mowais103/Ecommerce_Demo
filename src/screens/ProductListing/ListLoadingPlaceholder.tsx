@@ -15,23 +15,18 @@ const ListLoadingPlaceholder = () => (
           <SkeletonPlaceholder.Item
             marginTop={15}
             marginBottom={25}
-            marginLeft={15}>
+            marginLeft={25}>
             <SkeletonPlaceholder.Item
-              width={118}
+              width={72}
               height={16}
-              borderRadius={2}
+              alignSelf="center"
             />
+            <SkeletonPlaceholder.Item width={164} height={18} marginTop={10} />
             <SkeletonPlaceholder.Item
-              width={156}
-              height={25}
-              borderRadius={2}
-              marginTop={10}
-            />
-            <SkeletonPlaceholder.Item
-              width={118}
+              width={82}
               height={13}
-              borderRadius={2}
-              marginTop={5}
+              alignSelf="center"
+              marginTop={8}
             />
           </SkeletonPlaceholder.Item>
         </SkeletonPlaceholder.Item>
