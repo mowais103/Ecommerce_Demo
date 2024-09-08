@@ -34,6 +34,7 @@ const AtomButton = ({
     size: 'medium',
     textAlign: 'center',
     letterSpacing: 4,
+    fontWeight: '400',
   };
 
   const allAtomTextProps = {...DEFAULT_ATOM_TEXT_PROPS, ...atomTextProps};

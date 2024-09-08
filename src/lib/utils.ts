@@ -9,7 +9,7 @@ const getIconDims = (size: TIconSize) => {
 };
 
 const calculateOriginalPrice = (
-  discountedPrice: string,
+  discountedPrice: number,
   discountPercentage: number,
 ) => {
   const originalPrice =
