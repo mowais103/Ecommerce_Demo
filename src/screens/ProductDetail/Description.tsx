@@ -1,9 +1,7 @@
 import React from 'react';
-import {AtomText} from '../../components/atoms/AtomText';
-import {AtomView} from '../../components/atoms/AtomView';
-import {ListHeader} from '../../components/molecules/ListHeader';
 import {StyleSheet} from 'react-native';
-import {Colors} from '../../styles/common';
+import {AtomText, AtomView, ListHeader} from '../../components';
+import {Colors} from '../../styles';
 
 type DescriptionProps = {
   onPress: () => void;

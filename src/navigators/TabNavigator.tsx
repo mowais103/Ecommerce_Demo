@@ -3,18 +3,15 @@ import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {BottomTabParamList} from '../types/navTypes';
-import {AtomIcon} from '../components/atoms/AtomIcon';
-import {TIcons} from '../types/styleTypes';
+import {BottomTabParamList, TIcons} from '../types';
+import {AtomIcon, AtomText, AtomView} from '../components';
+import {Colors} from '../styles';
+import {TouchableOpacity} from 'react-native';
+import {useAppSelector} from '../lib';
 import {Home} from './HomeNavigator';
 import {Collections} from './CollectionNavigator';
 import {Cart} from './CartNavigator';
 import {Favorites} from './FavoritesNavigator';
-import {Colors} from '../styles/common';
-import {TouchableOpacity} from 'react-native';
-import {AtomText} from '../components/atoms/AtomText';
-import {AtomView} from '../components/atoms/AtomView';
-import {useAppSelector} from '../lib/hooks/common';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 

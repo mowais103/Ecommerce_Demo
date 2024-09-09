@@ -1,20 +1,21 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
-import {AtomView} from '../../components/atoms/AtomView';
-import {WINDOW_WIDTH} from '../../styles/common';
-import {AtomImage} from '../../components/atoms/AtomImage';
-import {CarouselSlider} from '../../components/molecules/CarouselSlider/CarouselSlider';
-import {RootStackScreenProps} from '../../types/navTypes';
-import {Divider} from '../../components/atoms/AtomDivider';
-import {AtomText} from '../../components/atoms/AtomText';
-import {AtomButton} from '../../components/atoms/AtomButton';
-import {Pill} from '../../components/molecules/Pill';
-import {Description} from './Description';
-import {calculateOriginalPrice} from '../../lib/utils';
-import {itemAdded} from '../../redux/slice/cart/cartSlice';
-import {useAppDispatch} from '../../lib/hooks/common';
 import {ListRenderItem, ListRenderItemInfo, StyleSheet} from 'react-native';
-import {HeaderLeft} from '../../components/molecules/HeaderLeft';
+import {WINDOW_WIDTH} from '../../styles';
+import {RootStackScreenProps} from '../../types';
+import {calculateOriginalPrice, useAppDispatch} from '../../lib';
+import {
+  AtomButton,
+  AtomImage,
+  AtomScreenContainer,
+  AtomText,
+  AtomView,
+  CarouselSlider,
+  Divider,
+  HeaderLeft,
+  Pill,
+} from '../../components';
+import {itemAdded} from '../../redux/slice/cart/cartSlice';
+import {Description} from './Description';
 
 const styles = StyleSheet.create({
   imgStyle: {

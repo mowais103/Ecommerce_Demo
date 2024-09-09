@@ -1,22 +1,24 @@
 import React, {Fragment, useCallback, useEffect, useState} from 'react';
-import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
-import {CarouselSlider} from '../../components/molecules/CarouselSlider/CarouselSlider';
-import {AtomImage} from '../../components/atoms/AtomImage';
-import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles/common';
-import {AtomView} from '../../components/atoms/AtomView';
-import {ProductCard} from '../../components/molecules/ProductCard';
-import {ListHeader} from '../../components/molecules/ListHeader';
-import Video from 'react-native-video';
 import {Endpoints, getData} from '../../async';
-import {Divider} from '../../components/atoms/AtomDivider';
-import {CollectionScroll} from '../../components/molecules/CollectionScroll';
-import {video_url} from './constants';
+import {Product} from '../../types';
+import {useImageAspectRatio} from '../../lib';
 import {FlatList, ListRenderItem, ListRenderItemInfo} from 'react-native';
-import {Spacer} from '../../components/atoms/AtomSpacer';
-import {useImageAspectRatio} from '../../lib/hooks';
-import {AppBanner} from '../../components/molecules/AppBanner';
+import {
+  AppBanner,
+  AtomImage,
+  AtomScreenContainer,
+  AtomView,
+  CarouselSlider,
+  CollectionScroll,
+  Divider,
+  ListHeader,
+  ProductCard,
+  Spacer,
+} from '../../components';
+import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles';
+import Video from 'react-native-video';
+import {video_url} from './constants';
 import {Images} from '../../assets';
-import {Product} from '../../types/apiDataTypes';
 
 const HomeScreen = () => {
   const [newArrivals, setNewArrivals] = useState<Product[]>([]);

@@ -1,7 +1,7 @@
 import React from 'react';
+import {AtomView} from '../../components';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import {WINDOW_WIDTH} from '../../styles/common';
-import {AtomView} from '../../components/atoms/AtomView';
+import {WINDOW_WIDTH} from '../../styles';
 
 const ListLoadingPlaceholder = () => (
   <AtomView flexDirection="row" scroll={true} flexWrap="wrap">
