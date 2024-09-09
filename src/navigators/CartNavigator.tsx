@@ -16,7 +16,7 @@ const Cart = () => {
       <Stack.Screen
         name="CartScreen"
         component={CartScreen}
-        options={{headerTitle: 'SHOP BUDDY'}}
+        options={{headerTitle: 'CART'}}
       />
     </Stack.Navigator>
   );

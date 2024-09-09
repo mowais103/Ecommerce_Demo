@@ -14,6 +14,7 @@ import {calculateOriginalPrice} from '../../lib/utils';
 import {itemAdded} from '../../redux/slice/cart/cartSlice';
 import {useAppDispatch} from '../../lib/hooks/common';
 import {ListRenderItem, ListRenderItemInfo, StyleSheet} from 'react-native';
+import {HeaderLeft} from '../../components/molecules/HeaderLeft';
 
 const styles = StyleSheet.create({
   imgStyle: {
@@ -112,7 +113,8 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
   }
 
   return (
-    <AtomScreenContainer>
+    <AtomScreenContainer screenHeader={false}>
+      <HeaderLeft isHeaderlessScreen={true} />
       <AtomView scroll={true}>
         <CarouselSlider
           loop={true}

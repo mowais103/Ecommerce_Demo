@@ -32,7 +32,10 @@ const CollectionScroll = ({collections}: CollectionScrollProps) => {
   const renderCollection: ListRenderItem<Category> = useCallback(
     ({item}: ListRenderItemInfo<Category>) => {
       const onPressCategory = () =>
-        navigation.navigate('ProductListing', {url: item?.url});
+        navigation.navigate('ProductListing', {
+          url: item?.url,
+          name: item.name,
+        });
 
       return (
         <AtomView
