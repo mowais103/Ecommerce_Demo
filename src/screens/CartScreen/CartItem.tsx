@@ -1,17 +1,19 @@
 import React, {useCallback} from 'react';
-import {AtomText} from '../../components/atoms/AtomText';
 import {FlatList, StyleSheet} from 'react-native';
-import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles/common';
-import {AtomView} from '../../components/atoms/AtomView';
-import {AtomCard} from '../../components/atoms/AtomCard';
-import {Divider} from '../../components/atoms/AtomDivider';
+import {
+  AtomCard,
+  AtomText,
+  AtomView,
+  Divider,
+  Quantifier,
+} from '../../components';
+import {useAppDispatch, useAppSelector} from '../../lib';
 import {
   itemAdded,
   itemRemoved,
   selectAllItems,
 } from '../../redux/slice/cart/cartSlice';
-import {useAppDispatch, useAppSelector} from '../../lib/hooks/common';
-import {Quantifier} from '../../components/molecules/Quantifier';
+import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles';
 
 const styles = StyleSheet.create({
   containerStyle: {

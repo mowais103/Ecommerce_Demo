@@ -1,6 +1,5 @@
 import React from 'react';
-import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
-import {AtomText} from '../../components/atoms/AtomText';
+import {AtomScreenContainer, AtomText} from '../../components';
 
 const SignInScreen = () => {
   console.log('hello');

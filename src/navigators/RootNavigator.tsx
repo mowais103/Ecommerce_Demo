@@ -1,13 +1,15 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../types/navTypes';
+import {RootStackParamList} from '../types';
+import {COMMON_HEADER_OPTIONS} from '../styles';
+import {
+  CartScreen,
+  ProductDetail,
+  ProductListing,
+  SignInScreen,
+} from '../screens';
 import {TabNavigator} from './TabNavigator';
-import {SignInScreen} from '../screens/SignInScreen/SignInScreen';
-import {ProductDetail} from '../screens/ProductDetail/ProductDetail';
-import {COMMON_HEADER_OPTIONS} from '../styles/constants';
-import {HeaderLeft} from '../components/molecules/HeaderLeft';
-import {ProductListing} from '../screens/ProductListing/ProductListing';
-import {CartScreen} from '../screens/CartScreen/CartScreen';
+import {HeaderLeft} from '../components';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();

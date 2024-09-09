@@ -1,8 +1,8 @@
 import React from 'react';
 import {COMMON_HEADER_OPTIONS} from '../styles/constants';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CartStackParamList} from '../types/navTypes';
-import {CartScreen} from '../screens/CartScreen/CartScreen';
+import {CartStackParamList} from '../types';
+import {CartScreen} from '../screens';
 
 const Stack = createNativeStackNavigator<CartStackParamList>();
 

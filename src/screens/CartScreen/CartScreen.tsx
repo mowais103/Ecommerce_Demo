@@ -1,16 +1,19 @@
 import React from 'react';
-import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
-import {CartItem} from './CartItem';
-import {AtomView} from '../../components/atoms/AtomView';
-import {AtomText} from '../../components/atoms/AtomText';
-import {useAppSelector} from '../../lib/hooks/common';
+import {
+  AtomButton,
+  AtomScreenContainer,
+  AtomText,
+  AtomView,
+} from '../../components';
+import {useAppSelector} from '../../lib';
 import {StyleSheet} from 'react-native';
-import {Colors} from '../../styles/common';
-import {AtomButton} from '../../components/atoms/AtomButton';
+
+import {CartItem} from './CartItem';
+import {Colors} from '../../styles';
 
 const styles = StyleSheet.create({
   priceContainer: {
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: Colors.coffeeBrown,
   },
 });

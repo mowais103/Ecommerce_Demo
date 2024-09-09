@@ -1,8 +1,8 @@
 import React from 'react';
 import {COMMON_HEADER_OPTIONS} from '../styles/constants';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CollectionScreen} from '../screens/CollectionScreen/CollectionScreen';
-import {CollectionsStackParamList} from '../types/navTypes';
+import {CollectionsStackParamList} from '../types';
+import {CollectionScreen} from '../screens';
 
 const Stack = createNativeStackNavigator<CollectionsStackParamList>();
 

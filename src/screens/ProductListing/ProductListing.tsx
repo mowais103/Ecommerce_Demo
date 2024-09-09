@@ -1,25 +1,21 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {AtomText} from '../../components/atoms/AtomText';
-import {AtomView} from '../../components/atoms/AtomView';
 import {
   FlatList,
   ListRenderItem,
   ListRenderItemInfo,
   StyleSheet,
 } from 'react-native';
+import {Colors, DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles';
+import {Product, RootStackScreenProps} from '../../types';
 import {
-  Colors,
-  DEFAULT_SCROLL_VIEW_PROPS,
-  WINDOW_WIDTH,
-} from '../../styles/common';
-import {RootStackScreenProps} from '../../types/navTypes';
+  AtomCard,
+  AtomScreenContainer,
+  AtomText,
+  AtomView,
+} from '../../components';
+import {calculateOriginalPrice, useImageAspectRatio} from '../../lib';
 import {getData} from '../../async';
-import {AtomCard} from '../../components/atoms/AtomCard';
-import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
-import {useImageAspectRatio} from '../../lib/hooks';
-import {calculateOriginalPrice} from '../../lib/utils';
 import {ListLoadingPlaceholder} from './ListLoadingPlaceholder';
-import {Product} from '../../types/apiDataTypes';
 
 const styles = StyleSheet.create({
   containerStyle: {
