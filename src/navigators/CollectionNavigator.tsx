@@ -16,7 +16,7 @@ const Collections = () => {
       <Stack.Screen
         name="CollectionScreen"
         component={CollectionScreen}
-        options={{headerTitle: 'SHOP BUDDY'}}
+        options={{headerTitle: ' OUR COLLECTIONS'}}
       />
     </Stack.Navigator>
   );

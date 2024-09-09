@@ -16,7 +16,7 @@ const Home = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{headerTitle: 'SHOP BUDDY'}}
+        options={{headerTitle: 'LAZADA'}}
       />
     </Stack.Navigator>
   );

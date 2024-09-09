@@ -6,7 +6,7 @@ type RootStackParamList = {
   SignInScreen: undefined;
   TabNavigator: undefined;
   ProductDetail: {product: Product};
-  ProductListing: {url: string};
+  ProductListing: {url: string; name?: string};
   CartScreen: undefined;
 };
 
