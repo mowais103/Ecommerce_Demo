@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   ListRenderItem,
   ListRenderItemInfo,
@@ -35,31 +36,66 @@ const ItemSeparatorComponent = () => <AtomView mR="small" />;
 const ProductListing = ({route, navigation}: ProductListingProps) => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<Product[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState<number>(1);
+  const [hasMoreLoading, setHasMoreLoading] = useState(false);
 
   const {url} = route.params;
-  const endPointToUse = url.split('/dummyjson.com')[1]; //  split url as we have base url already defined
+  const endPointToUse = url.split('/dummyjson.com')[1];
 
   const aspectRatio = useImageAspectRatio(
     product[0]?.thumbnail ? product[0]?.thumbnail : '',
   );
 
-  const fetchProductsByCategory = useCallback(async () => {
-    setLoading(true);
+  const fetchProducts = async (page: number) => {
+    const skip = (page - 1) * 10;
     try {
-      const res = await getData(endPointToUse);
-      if (res.data) {
-        setProduct(res.data.products);
-        setLoading(false);
-      }
-    } catch (e) {
-      setLoading(false);
-      console.warn(e);
+      const response = await getData(`${endPointToUse}?limit=10&skip=${skip}`);
+      const data = await response.data;
+      return data?.products;
+    } catch (error) {
+      console.error(error);
     }
-  }, [endPointToUse]);
+  };
+
+  const loadProducts = async () => {
+    const isInitialPage = page === 1;
+    if (!loading && hasMore) {
+      isInitialPage ? setLoading(true) : setHasMoreLoading(true);
+      const newProducts = await fetchProducts(page);
+      if (newProducts.length > 0) {
+        setProduct(prevProducts => [...prevProducts, ...newProducts]);
+      } else {
+        setHasMore(false);
+      }
+      isInitialPage ? setLoading(false) : setHasMoreLoading(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (hasMore && !loading) {
+      setPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const renderFooter = () => {
+    return hasMoreLoading ? (
+      <AtomView pV="small">
+        <ActivityIndicator size="small" color={Colors.pineGreen} />
+      </AtomView>
+    ) : (
+      <AtomText
+        text={'No More Products'}
+        pV="small"
+        alignSelf="center"
+        color={'black30'}
+      />
+    );
+  };
 
   useEffect(() => {
-    fetchProductsByCategory();
-  }, [fetchProductsByCategory]);
+    loadProducts();
+  }, [page]);
 
   const renderProduct: ListRenderItem<Product> = useCallback(
     ({item}: ListRenderItemInfo<Product>) => {
@@ -137,6 +173,8 @@ const ProductListing = ({route, navigation}: ProductListingProps) => {
         data={product}
         renderItem={renderProduct}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        onEndReached={handleLoadMore}
+        ListFooterComponent={renderFooter}
       />
     </AtomScreenContainer>
   );
