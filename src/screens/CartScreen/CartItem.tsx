@@ -1,5 +1,10 @@
 import React, {useCallback} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  StyleSheet,
+} from 'react-native';
 import {
   AtomButton,
   AtomCard,
@@ -15,6 +20,7 @@ import {
   selectAllItems,
 } from '../../redux/slice/cart/cartSlice';
 import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles';
+import {Product} from '../../types';
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -68,8 +74,8 @@ const CartItem = ({totalPrice}: {totalPrice: number}) => {
     [totalPrice],
   );
 
-  const renderCartItem = useCallback(
-    ({item}: any) => {
+  const renderCartItem: ListRenderItem<Product> = useCallback(
+    ({item}: ListRenderItemInfo<Product>) => {
       const onIncrementItemQty = () => {
         dispatch(itemAdded(item));
       };
@@ -79,9 +85,9 @@ const CartItem = ({totalPrice}: {totalPrice: number}) => {
       };
 
       return (
-        <AtomView flexDirection="row" mAll="small" pV="small">
+        <AtomView flexDirection="row" mAll="small" pV="small" flex={1}>
           <AtomCard
-            image={item.image}
+            image={item.thumbnail}
             containerStyle={styles.containerStyle}
             imgStyle={styles.imgStyle}
           />
