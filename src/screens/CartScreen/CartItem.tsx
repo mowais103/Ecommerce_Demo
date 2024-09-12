@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 const ItemSeparatorComponent = () => <Divider />;
 
 const ListEmptyComponent = () => (
-  <AtomView mH="large">
+  <AtomView mH="large" flex={1} justifyContent="center" alignItems="center">
     <AtomText
       size="large"
       textAlign="center"
@@ -127,7 +127,7 @@ const CartItem = ({totalPrice}: {totalPrice: number}) => {
       renderItem={renderCartItem}
       keyExtractor={(item, index) => `${item.id}-${index}`}
       ItemSeparatorComponent={ItemSeparatorComponent}
-      ListFooterComponent={ListFooterComponent}
+      ListFooterComponent={cartItems.length ? ListFooterComponent : null}
       ListEmptyComponent={ListEmptyComponent}
       ListFooterComponentStyle={styles.ListFooterComponentStyle}
       contentContainerStyle={styles.contentContainerStyle}
