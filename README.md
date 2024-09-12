@@ -11,6 +11,8 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 - Implemented my own carousel component.
 - For local storage redux tool kit is used and persist data with redux-persist.
 
+[![Watch the video](https://github.com/user-attachments/assets/44547c2b-5815-4f70-822e-616c2fd3623d)]
+
 > **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
