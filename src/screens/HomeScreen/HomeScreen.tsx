@@ -9,16 +9,16 @@ import {
   AtomScreenContainer,
   AtomView,
   CarouselSlider,
-  CollectionScroll,
   Divider,
   ListHeader,
-  ProductCard,
   Spacer,
 } from '../../components';
 import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles';
 import Video from 'react-native-video';
 import {video_url} from './constants';
 import {Images} from '../../assets';
+import {NewArrivals} from './NewArrivals';
+import {CollectionScroll} from './CollectionScroll';
 
 const HomeScreen = () => {
   const [newArrivals, setNewArrivals] = useState<Product[]>([]);
@@ -98,7 +98,7 @@ const HomeScreen = () => {
         <AtomView pV="large" pH="medium">
           <ListHeader title={'Shop New Arrivals'} icon="arrowRight" />
           <Spacer vertical="small" />
-          <ProductCard data={newArrivals} />
+          <NewArrivals data={newArrivals} />
 
           <Spacer vertical="medium" />
           <ListHeader title={'Browse Hot Categories'} />

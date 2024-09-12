@@ -5,3 +5,7 @@ export type CartItem = {
   totalQty: number;
   totalPrice: number;
 };
+
+export type FavItem = {
+  favItems: Product[];
+};

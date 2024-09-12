@@ -1,6 +1,5 @@
 import React, {useCallback} from 'react';
-import {AtomView} from '../atoms/AtomView';
-import {AtomText} from '../atoms/AtomText';
+import {AtomView} from '../../components/atoms/AtomView';
 import {
   FlatList,
   ListRenderItem,
@@ -8,10 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import {DEFAULT_SCROLL_VIEW_PROPS} from '../../styles/common';
-import {useNavigation} from '@react-navigation/native';
 import {Category} from '../../types/apiDataTypes';
-import {RootNavigation} from '../../types/navTypes';
-import {getCircleStyle} from '../../styles/utils';
+import {CollectionCircle} from '../../components/molecules/CollectionCircle';
 
 type CollectionScrollProps = {
   collections: Category[];
@@ -27,36 +24,11 @@ const styles = StyleSheet.create({
 const ItemSeparatorComponent = () => <AtomView pR="xs" />;
 
 const CollectionScroll = ({collections}: CollectionScrollProps) => {
-  const navigation = useNavigation<RootNavigation>();
-
   const renderCollection: ListRenderItem<Category> = useCallback(
-    ({item}: ListRenderItemInfo<Category>) => {
-      const onPressCategory = () =>
-        navigation.navigate('ProductListing', {
-          url: item?.url,
-          name: item.name,
-        });
-
-      return (
-        <AtomView
-          onPress={onPressCategory}
-          mV="small"
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor="pineGreen"
-          style={getCircleStyle()}>
-          <AtomText
-            color="white"
-            fontWeight={'bold'}
-            text={item?.name}
-            numberOfLines={2}
-            textTransform="uppercase"
-            size="small"
-          />
-        </AtomView>
-      );
-    },
-    [navigation],
+    ({item}: ListRenderItemInfo<Category>) => (
+      <CollectionCircle collection={item} />
+    ),
+    [],
   );
 
   return (

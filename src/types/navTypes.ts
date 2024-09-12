@@ -6,7 +6,7 @@ type RootStackParamList = {
   SignInScreen: undefined;
   TabNavigator: undefined;
   ProductDetail: {product: Product};
-  ProductListing: {url: string; name?: string};
+  ProductListing: {url: string; name?: string; favorite?: boolean};
   CartScreen: undefined;
 };
 
@@ -30,7 +30,7 @@ type CartStackParamList = {
 };
 
 type FavoritesStackParamList = {
-  HomeScreen: undefined;
+  ProductListing: {url: string; name?: string; favorite?: boolean};
 };
 
 type RootNavigation = NavigationProp<RootStackParamList>;

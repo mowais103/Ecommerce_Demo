@@ -5,6 +5,6 @@ export * from './Pill';
 export * from './ProductCard';
 export * from './Quantifier';
 export * from './SearchBar';
-export * from './CollectionScroll';
+export * from './CollectionCircle';
 export * from './CarouselSlider';
 export * from './ListHeader';
