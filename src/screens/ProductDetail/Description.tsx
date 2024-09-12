@@ -28,7 +28,7 @@ const Description = ({
 }: DescriptionProps) => (
   <AtomView style={styles.container} onPress={onPress}>
     <ListHeader
-      title="Product Details"
+      title="Product Description"
       icon={showProductDetails ? 'triangleUp' : 'triangleDown'}
     />
     {showProductDetails ? (

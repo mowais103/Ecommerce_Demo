@@ -18,7 +18,11 @@ const SearchBar = ({value, onChangeText, onPressClose}: SearchBarProps) => {
       autoCapitalize="none"
       spellCheck={false}
       LeftElement={<AtomIcon icon="search" size="xl" />}
-      RightElement={<AtomIcon icon="close" size="xl" onPress={onPressClose} />}
+      RightElement={
+        value ? (
+          <AtomIcon icon="close" size="xl" onPress={onPressClose} />
+        ) : null
+      }
     />
   );
 };

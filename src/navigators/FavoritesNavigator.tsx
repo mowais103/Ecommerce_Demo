@@ -1,22 +1,23 @@
 import React from 'react';
 import {COMMON_HEADER_OPTIONS} from '../styles/constants';
-import {HomeScreen} from '../screens/HomeScreen/HomeScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {FavoritesTabParamList} from '../types/navTypes';
+import {ProductListing} from '../screens';
+import {FavoritesStackParamList} from '../types';
 
-const Stack = createNativeStackNavigator<FavoritesTabParamList>();
+const Stack = createNativeStackNavigator<FavoritesStackParamList>();
 
 const Favorites = () => {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="ProductListing"
       screenOptions={{
         ...COMMON_HEADER_OPTIONS,
       }}>
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{headerTitle: 'SHOP BUDDY'}}
+        initialParams={{favorite: true}}
+        name="ProductListing"
+        component={ProductListing}
+        options={{headerTitle: 'FAVORITES'}}
       />
     </Stack.Navigator>
   );

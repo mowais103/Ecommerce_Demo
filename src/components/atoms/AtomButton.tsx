@@ -33,7 +33,7 @@ const AtomButton = ({
     color: 'white',
     size: 'medium',
     textAlign: 'center',
-    letterSpacing: 4,
+    letterSpacing: 3,
     fontWeight: '400',
   };
 

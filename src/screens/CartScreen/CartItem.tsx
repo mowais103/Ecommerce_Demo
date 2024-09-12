@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {
+  AtomButton,
   AtomCard,
   AtomText,
   AtomView,
@@ -21,13 +22,51 @@ const styles = StyleSheet.create({
     width: '30%',
   },
   imgStyle: {width: '100%', aspectRatio: 1},
+  contentContainerStyle: {
+    flexGrow: 1,
+  },
+  ListFooterComponentStyle: {
+    justifyContent: 'flex-end',
+    flexGrow: 1,
+  },
 });
 
 const ItemSeparatorComponent = () => <Divider />;
 
-const CartItem = () => {
+const ListEmptyComponent = () => (
+  <AtomView mH="large">
+    <AtomText
+      size="large"
+      textAlign="center"
+      text={'Your cart is empty, shop and add products to cart'}
+    />
+  </AtomView>
+);
+
+const CartItem = ({totalPrice}: {totalPrice: number}) => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectAllItems);
+
+  const ListFooterComponent = useCallback(
+    () => (
+      <AtomView>
+        <AtomView
+          pV="medium"
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="flex-end">
+          <AtomText text={'TOTAL'} fontWeight={'semibold'} />
+          <AtomText
+            text={`$${totalPrice.toFixed(2)}`}
+            fontWeight={'bold'}
+            color="pineGreen"
+          />
+        </AtomView>
+        <AtomButton text="Proceed to Checkout" onPress={() => null} />
+      </AtomView>
+    ),
+    [totalPrice],
+  );
 
   const renderCartItem = useCallback(
     ({item}: any) => {
@@ -40,7 +79,7 @@ const CartItem = () => {
       };
 
       return (
-        <AtomView flexDirection="row" mAll="xs" pV="small">
+        <AtomView flexDirection="row" mAll="small" pV="small">
           <AtomCard
             image={item.image}
             containerStyle={styles.containerStyle}
@@ -88,6 +127,10 @@ const CartItem = () => {
       renderItem={renderCartItem}
       keyExtractor={(item, index) => `${item.id}-${index}`}
       ItemSeparatorComponent={ItemSeparatorComponent}
+      ListFooterComponent={ListFooterComponent}
+      ListEmptyComponent={ListEmptyComponent}
+      ListFooterComponentStyle={styles.ListFooterComponentStyle}
+      contentContainerStyle={styles.contentContainerStyle}
     />
   );
 };

@@ -1,11 +1,25 @@
 import React from 'react';
 import {TIcons} from '../../types/styleTypes';
 import {AtomView} from '../atoms/AtomView';
-import {AtomText} from '../atoms/AtomText';
+import {AtomText, AtomTextProps} from '../atoms/AtomText';
 import {AtomIcon} from '../atoms/AtomIcon';
-import {Colors} from '../../styles/common';
+import {ImageStyle} from 'react-native';
 
-const ListHeader = ({title, icon}: {title: string; icon?: TIcons}) => (
+type ListHeaderProps = {
+  title: string;
+  icon?: TIcons;
+  onPressIcon?: () => void;
+  iconStyle?: ImageStyle;
+  textStyle?: AtomTextProps;
+};
+
+const ListHeader = ({
+  title,
+  icon,
+  onPressIcon,
+  textStyle,
+  iconStyle,
+}: ListHeaderProps) => (
   <AtomView
     flexDirection="row"
     justifyContent="space-between"
@@ -14,11 +28,16 @@ const ListHeader = ({title, icon}: {title: string; icon?: TIcons}) => (
     <AtomText
       text={title}
       textTransform={'uppercase'}
-      color="coffeeBrown"
-      fontWeight={'400'}
+      fontWeight={'500'}
+      style={textStyle}
     />
     {icon ? (
-      <AtomIcon icon={icon} tintColor={Colors.coffeeBrown} size="xxl" />
+      <AtomIcon
+        icon={icon}
+        size="xxl"
+        onPress={onPressIcon}
+        style={iconStyle}
+      />
     ) : null}
   </AtomView>
 );

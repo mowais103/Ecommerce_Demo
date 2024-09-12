@@ -1,8 +1,12 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {ListRenderItem, ListRenderItemInfo, StyleSheet} from 'react-native';
-import {WINDOW_WIDTH} from '../../styles';
-import {RootStackScreenProps} from '../../types';
-import {calculateOriginalPrice, useAppDispatch} from '../../lib';
+import {Colors, WINDOW_WIDTH} from '../../styles';
+import {Product, RootStackScreenProps} from '../../types';
+import {
+  calculateOriginalPrice,
+  useAppDispatch,
+  useAppSelector,
+} from '../../lib';
 import {
   AtomButton,
   AtomImage,
@@ -12,10 +16,16 @@ import {
   CarouselSlider,
   Divider,
   HeaderLeft,
+  ListHeader,
   Pill,
 } from '../../components';
 import {itemAdded} from '../../redux/slice/cart/cartSlice';
 import {Description} from './Description';
+import {
+  selectAllFavItems,
+  toggleFavItem,
+} from '../../redux/slice/product/productSlice';
+import {isSelected} from './utils';
 
 const styles = StyleSheet.create({
   imgStyle: {
@@ -31,9 +41,12 @@ type ProductDetailProps = {
 
 const ProductDetail = ({route, navigation}: ProductDetailProps) => {
   const [showProductDetails, setShowProductDetails] = useState<boolean>(false);
+  const [product, setProduct] = useState<Product>(route.params.product);
+  const [fav, setFav] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const {product} = route.params;
+  const favItem = useAppSelector(selectAllFavItems);
+  const isFavorite = fav || isSelected(favItem, product.id);
 
   const originalPrice = calculateOriginalPrice(
     product.price,
@@ -66,48 +79,66 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
     [],
   );
 
+  const onPressFavorite = useCallback(() => {
+    setFav(!fav);
+    setProduct(product);
+    dispatch(toggleFavItem(product));
+  }, [dispatch, product, fav]);
+
   const renderProductDetails = useCallback(
     () => (
-      <AtomView pAll="medium" flex={1}>
-        <AtomText
-          text={product.title}
-          pB="small"
-          textTransform="uppercase"
-          fontWeight={'500'}
-        />
-        <AtomView flexDirection="row" pB="medium">
-          <AtomText text={`$${product.price}`} pR="medium" fontWeight={'400'} />
-          <AtomText
-            text={`$${originalPrice}`}
-            lineThrough={true}
-            color="black30"
-            fontWeight={'semibold'}
+      <>
+        <AtomView pAll="medium" flex={1}>
+          <ListHeader
+            iconStyle={{tintColor: Colors.red}}
+            title={product.title}
+            icon={isFavorite ? 'favoriteActive' : 'favoriteInActive'}
+            onPressIcon={onPressFavorite}
           />
+          <AtomView flexDirection="row" mV="small" flex={1}>
+            <AtomText
+              text={`$${product.price}`}
+              pR="medium"
+              fontWeight={'400'}
+            />
+            <AtomText
+              text={`$${originalPrice}`}
+              lineThrough={true}
+              color="black30"
+              fontWeight={'semibold'}
+            />
+          </AtomView>
+
+          {renderPills()}
         </AtomView>
-        {renderPills()}
-      </AtomView>
+        <AtomText
+          text={product.availabilityStatus}
+          color={product.availabilityStatus === 'In Stock' ? 'black30' : 'red'}
+          fontWeight={'semibold'}
+          pL="medium"
+        />
+      </>
     ),
-    [originalPrice, product.price, product.title, renderPills],
+    [
+      originalPrice,
+      product.price,
+      product.title,
+      renderPills,
+      product.availabilityStatus,
+      onPressFavorite,
+      isFavorite,
+    ],
   );
 
   const addToCart = useCallback(() => {
-    if (product.id) {
-      const itemToAdd = {
-        id: product.id,
-        title: product.title,
-        image: product.thumbnail,
-        brand: product.brand,
-        price: product.price,
-        qty: 1,
-      };
-      dispatch(itemAdded(itemToAdd));
-      navigation.navigate('CartScreen');
-    }
+    setProduct(product);
+    dispatch(itemAdded(product));
+    navigation.navigate('CartScreen');
   }, [product, dispatch, navigation]);
 
-  const onPressDescription = () => {
+  const onPressDescription = useCallback(() => {
     setShowProductDetails(!showProductDetails);
-  };
+  }, [showProductDetails]);
 
   if (!product) {
     return null;
@@ -126,12 +157,7 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
           keyExtractor={(item, index) => `${item}-${index}`}
         />
         {renderProductDetails()}
-        <AtomText
-          text={product.availabilityStatus}
-          color={product.availabilityStatus === 'In Stock' ? 'black30' : 'red'}
-          fontWeight={'semibold'}
-          pL="medium"
-        />
+
         <Description
           description={product.description}
           showProductDetails={showProductDetails}
