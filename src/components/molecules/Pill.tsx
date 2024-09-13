@@ -9,19 +9,20 @@ const Pill = ({
 }: {
   backgroundColor?: TColor;
   name: string;
-}) => (
-  <AtomView
-    key={name}
-    backgroundColor={backgroundColor}
-    borderColor="pineGreen"
-    borderRadius="medium"
-    justifyContent="center"
-    alignItems="center"
-    pH="medium"
-    pV="small"
-    mR="small">
-    <AtomText text={name} size="small" textTransform="capitalize" />
-  </AtomView>
-);
+}) =>
+  name ? (
+    <AtomView
+      key={name}
+      backgroundColor={backgroundColor}
+      borderColor="pineGreen"
+      borderRadius="medium"
+      justifyContent="center"
+      alignItems="center"
+      pH="medium"
+      pV="small"
+      mR="small">
+      <AtomText text={name} size="small" textTransform="capitalize" />
+    </AtomView>
+  ) : null;
 
 export {Pill};

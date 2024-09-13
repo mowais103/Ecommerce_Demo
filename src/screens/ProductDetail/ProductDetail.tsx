@@ -90,7 +90,7 @@ const ProductDetail = ({route, navigation}: ProductDetailProps) => {
       <>
         <AtomView pAll="medium" flex={1}>
           <ListHeader
-            iconStyle={{tintColor: Colors.red}}
+            iconStyle={{tintColor: isFavorite ? Colors.red : undefined}}
             title={product.title}
             icon={isFavorite ? 'favoriteActive' : 'favoriteInActive'}
             onPressIcon={onPressFavorite}
