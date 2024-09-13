@@ -1,4 +1,4 @@
-import React, {Fragment, useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Endpoints, getData} from '../../async';
 import {Product} from '../../types';
 import {useImageAspectRatio} from '../../lib';
@@ -13,7 +13,7 @@ import {
   ListHeader,
   Spacer,
 } from '../../components';
-import {DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles';
+import {Colors, DEFAULT_SCROLL_VIEW_PROPS, WINDOW_WIDTH} from '../../styles';
 import Video from 'react-native-video';
 import {video_url} from './constants';
 import {Images} from '../../assets';
@@ -91,24 +91,32 @@ const HomeScreen = () => {
     [newArrivals, renderCarouselItem],
   );
 
-  const renderContentBelowCarousel = useCallback(
-    () => (
-      <Fragment>
-        <Divider />
-        <AtomView pV="large" pH="medium">
-          <ListHeader title={'Shop New Arrivals'} icon="arrowRight" />
-          <Spacer vertical="small" />
-          <NewArrivals data={newArrivals} />
-
+  const renderItem = useCallback(
+    ({index}: any) =>
+      index === 0 ? (
+        <>
+          <Divider />
+          <AtomView pV="large" pH="medium">
+            <ListHeader
+              title={'Shop New Arrivals'}
+              icon="arrowRight"
+              iconStyle={{tintColor: Colors.coffeeBrown}}
+            />
+            <Spacer vertical="small" />
+            <NewArrivals data={newArrivals} />
+          </AtomView>
+        </>
+      ) : index === 1 ? (
+        <AtomView pV="small" pH="medium">
+          <ListHeader title={'Explore Hot Categories'} />
           <Spacer vertical="medium" />
-          <ListHeader title={'Browse Hot Categories'} />
-          <Spacer vertical="medium" />
-
           <CollectionScroll collections={categories} />
-          <Spacer vertical="medium" />
+        </AtomView>
+      ) : index === 2 ? (
+        <AtomView pV="medium">
           <AppBanner image={Images.banner} />
         </AtomView>
-
+      ) : index === 3 ? (
         <Video
           source={{
             uri: video_url,
@@ -123,8 +131,7 @@ const HomeScreen = () => {
           onError={e => console.log(e)}
           poster={'https://picsum.photos/seed/picsum/1800/1400'}
         />
-      </Fragment>
-    ),
+      ) : null,
     [categories, newArrivals],
   );
 
@@ -136,10 +143,9 @@ const HomeScreen = () => {
     <AtomScreenContainer>
       <FlatList
         {...DEFAULT_SCROLL_VIEW_PROPS}
-        data={[]}
-        renderItem={() => null}
+        data={[1, 1, 1, 1]} // render screen as flatlist with 4 items
+        renderItem={renderItem}
         ListHeaderComponent={renderCarousel()}
-        ListFooterComponent={renderContentBelowCarousel()}
       />
     </AtomScreenContainer>
   );

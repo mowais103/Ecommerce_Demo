@@ -31,14 +31,7 @@ const Description = ({
       title="Product Description"
       icon={showProductDetails ? 'triangleUp' : 'triangleDown'}
     />
-    {showProductDetails ? (
-      <AtomText
-        text={description}
-        pV="medium"
-        color="brown"
-        fontWeight={'400'}
-      />
-    ) : null}
+    {showProductDetails ? <AtomText text={description} pV="medium" /> : null}
   </AtomView>
 );
 
