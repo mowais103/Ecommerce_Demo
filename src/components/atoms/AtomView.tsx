@@ -20,7 +20,7 @@ import {debounce} from 'underscore';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {memo} from 'react';
 
-const DEFAULT_DEBOUNCE_TIME = 100;
+const DEFAULT_DEBOUNCE_TIME = 500;
 
 const styles = StyleSheet.create({
   container: {

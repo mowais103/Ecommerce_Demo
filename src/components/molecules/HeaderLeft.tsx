@@ -13,7 +13,7 @@ const HeaderLeft = ({
     <AtomIcon
       mL={isHeaderlessScreen ? 'medium' : undefined}
       icon={'arrowBack'}
-      tintColor={isHeaderlessScreen ? Colors.pineGreen : Colors.white}
+      tintColor={isHeaderlessScreen ? Colors.black : Colors.white}
       size="xxl"
       onPress={() => navigation.goBack()}
     />
