@@ -50,9 +50,8 @@ const AtomButton = ({
   return (
     <AtomView
       {...rest}
-      mAll="medium"
-      opacity={disabled ? 0.3 : undefined}
-      style={[style]}
+      opacity={disabled ? 0.7 : undefined}
+      style={style}
       backgroundColor={backgroundColor}
       onPress={onPress}
       activeOpacity={0.7}

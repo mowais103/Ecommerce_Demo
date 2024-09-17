@@ -4,6 +4,7 @@ import {Product} from './apiDataTypes';
 
 type RootStackParamList = {
   SignInScreen: undefined;
+  SignUpScreen: undefined;
   TabNavigator: undefined;
   ProductDetail: {product: Product};
   ProductListing: {url: string; name?: string; favorite?: boolean};

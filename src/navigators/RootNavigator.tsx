@@ -8,13 +8,18 @@ import {
   ProductListing,
   SignInScreen,
 } from '../screens';
-import {TabNavigator} from './TabNavigator';
+
 import {HeaderLeft} from '../components';
+import {SignUpScreen} from '../screens/SignUpScreen';
+import {TabNavigator} from './TabNavigator';
+import {useAppSelector} from '../lib';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
-  const isSignedIn = true; // add logic here later
+  const user = useAppSelector(state => state.user.id);
+
+  const isSignedIn = !!user; // add logic here later
   return (
     <Stack.Navigator
       initialRouteName="SignInScreen"
@@ -24,7 +29,16 @@ const RootNavigator = () => {
       }}>
       {!isSignedIn ? (
         <>
-          <Stack.Screen name="SignInScreen" component={SignInScreen} />
+          <Stack.Screen
+            name="SignInScreen"
+            component={SignInScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SignUpScreen"
+            component={SignUpScreen}
+            options={{headerShown: false}}
+          />
         </>
       ) : (
         <>

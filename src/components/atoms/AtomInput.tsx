@@ -18,8 +18,10 @@ type AtomInputProps = TextInputProps & {
   errorMessage?: string;
   disabled?: boolean | null;
   ref?: LegacyRef<TextInput>;
-  viewStyle?: StyleProp<ViewStyle>;
+  inputContainerStyle?: StyleProp<ViewStyle>;
   backgroundColor?: TColor;
+  borderColor?: TColor;
+  inputTextColor?: TColor;
 };
 
 const styles = StyleSheet.create({
@@ -36,8 +38,10 @@ const AtomInput = ({
   disabled,
   errorMessage,
   style,
-  viewStyle,
+  inputContainerStyle,
   backgroundColor,
+  inputTextColor,
+  borderColor,
   ref,
   ...rest
 }: AtomInputProps) => {
@@ -47,8 +51,8 @@ const AtomInput = ({
 
   const renderError = () =>
     errorMessage ? (
-      <AtomText text={errorMessage} color={'red'} pT="xs" />
-    ) : undefined;
+      <AtomText text={errorMessage} color={'red'} pT="small" />
+    ) : null;
 
   const renderLeftElement = () =>
     LeftElement ? (
@@ -67,10 +71,14 @@ const AtomInput = ({
   const renderInput = () => (
     <TextInput
       {...rest}
-      style={getStyleFromProps}
+      style={[
+        getStyleFromProps,
+        {color: inputTextColor ? inputTextColor : undefined},
+      ]}
       ref={ref}
       editable={!disabled}
       returnKeyType={returnKeyType}
+      autoCorrect={false}
     />
   );
 
@@ -78,10 +86,10 @@ const AtomInput = ({
     <Fragment>
       <AtomView
         backgroundColor={backgroundColor}
-        style={viewStyle}
+        style={inputContainerStyle}
         flexDirection="row"
         pH="medium"
-        borderColor="silver"
+        borderColor={borderColor ? borderColor : 'silver'}
         borderRadius={'small'}>
         {renderLeftElement()}
         {renderInput()}

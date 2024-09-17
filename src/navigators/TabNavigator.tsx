@@ -55,6 +55,7 @@ const TabNavigator = () => {
 
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => <TabBar focused={focused} route={route} />,
         headerShown: false,
