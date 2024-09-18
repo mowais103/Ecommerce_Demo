@@ -12,6 +12,7 @@ import {Home} from './HomeNavigator';
 import {Collections} from './CollectionNavigator';
 import {Cart} from './CartNavigator';
 import {Favorites} from './FavoritesNavigator';
+import {Account} from './AccountNavigator';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -26,6 +27,8 @@ const TabBar = ({focused, route}: any) => {
     iconName = focused ? 'cartActive' : 'cartInActive';
   } else if (route.name === 'Favorites') {
     iconName = focused ? 'favoriteActive' : 'favoriteInActive';
+  } else if (route.name === 'Account') {
+    iconName = focused ? 'accountMenu' : 'accountMenu';
   }
 
   return (
@@ -72,6 +75,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen name="Favorites" component={Favorites} />
+      <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
 };

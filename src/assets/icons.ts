@@ -16,6 +16,7 @@ const Icons = {
   plus: require('./icons/plus.png'),
   trash: require('./icons/trash.png'),
   minus: require('./icons/minus.png'),
+  accountMenu: require('./icons/accountMenu.png'),
 };
 
 export {Icons};

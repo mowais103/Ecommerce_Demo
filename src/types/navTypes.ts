@@ -16,6 +16,7 @@ type BottomTabParamList = {
   Collections: undefined;
   Favorites: undefined;
   Cart: undefined;
+  Account: undefined;
 };
 
 type HomeStackParamList = {
@@ -34,41 +35,46 @@ type FavoritesStackParamList = {
   ProductListing: {url: string; name?: string; favorite?: boolean};
 };
 
-type RootNavigation = NavigationProp<RootStackParamList>;
-type RootStackScreenProps<T extends keyof RootStackParamList> =
+type AccountStackParamList = {
+  AccountScreen: undefined;
+};
+
+export type RootNavigation = NavigationProp<RootStackParamList>;
+export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
-type BottomTabNavigation = NavigationProp<BottomTabParamList>;
-type BottomTabScreenProps<T extends keyof BottomTabParamList> =
+export type BottomTabNavigation = NavigationProp<BottomTabParamList>;
+export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
   NativeStackScreenProps<BottomTabParamList, T>;
 
-type HomeStackNavigation = NavigationProp<HomeStackParamList>;
-type HomeStackScreenProps<T extends keyof HomeStackParamList> =
+export type HomeStackNavigation = NavigationProp<HomeStackParamList>;
+export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   NativeStackScreenProps<HomeStackParamList, T>;
 
-type CollectionStackNavigation = NavigationProp<CollectionsStackParamList>;
-type CollectionStackScreenProps<T extends keyof CollectionsStackParamList> =
-  NativeStackScreenProps<CollectionsStackParamList, T>;
+export type CollectionStackNavigation =
+  NavigationProp<CollectionsStackParamList>;
+export type CollectionStackScreenProps<
+  T extends keyof CollectionsStackParamList,
+> = NativeStackScreenProps<CollectionsStackParamList, T>;
 
-type CartStackNavigation = NavigationProp<CartStackParamList>;
-type CartStackScreenProps<T extends keyof CartStackParamList> =
+export type AccountStackNavigation = NavigationProp<AccountStackParamList>;
+export type AccountStackScreenProps<T extends keyof AccountStackParamList> =
+  NativeStackScreenProps<AccountStackParamList, T>;
+
+export type CartStackNavigation = NavigationProp<CartStackParamList>;
+export type CartStackScreenProps<T extends keyof CartStackParamList> =
   NativeStackScreenProps<CartStackParamList, T>;
+
+export type FavoritesStackNavigation = NavigationProp<FavoritesStackParamList>;
+export type FavoritesStackScreenProps<T extends keyof FavoritesStackParamList> =
+  NativeStackScreenProps<FavoritesStackParamList, T>;
 
 export type {
   RootStackParamList,
-  RootNavigation,
-  RootStackScreenProps,
   BottomTabParamList,
   HomeStackParamList,
   CollectionsStackParamList,
+  AccountStackParamList,
   CartStackParamList,
   FavoritesStackParamList,
-  BottomTabNavigation,
-  BottomTabScreenProps,
-  HomeStackNavigation,
-  HomeStackScreenProps,
-  CollectionStackNavigation,
-  CollectionStackScreenProps,
-  CartStackNavigation,
-  CartStackScreenProps,
 };
