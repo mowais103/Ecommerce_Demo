@@ -8,18 +8,15 @@ import {
   ProductListing,
   SignInScreen,
 } from '../screens';
-
 import {HeaderLeft} from '../components';
 import {SignUpScreen} from '../screens/SignUpScreen';
 import {TabNavigator} from './TabNavigator';
-import {useAppSelector} from '../lib';
+import {useInitializeAuth} from '../lib/hooks/useInitializeAuth';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
+  const isSignedIn = useInitializeAuth();
 
-  const user = useAppSelector(state => state.user.id);
-
-  const isSignedIn = !!user; // add logic here later
   return (
     <Stack.Navigator
       initialRouteName="SignInScreen"
